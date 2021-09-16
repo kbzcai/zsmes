@@ -47,6 +47,11 @@ public class MesStationController {
         return stationVO;
     }
 
+    @GetMapping("/queryAllStation")
+    public List<MesStation> queryAllStation(){
+        return mesStationService.queryAllStation();
+    }
+
     @PutMapping("/updateStation")
     public String updateStation(@RequestBody MesStation mesStation){
         return mesStationService.updateStation(mesStation);

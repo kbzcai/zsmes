@@ -8,6 +8,7 @@ import com.example.zsmes.entity.MesStation;
 import com.example.zsmes.mapper.MesStationMapper;
 import com.example.zsmes.service.MesStationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.zsmes.utils.GetUUID;
 import com.example.zsmes.vo.StationCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,7 @@ public class MesStationServiceImpl extends ServiceImpl<MesStationMapper, MesStat
 
     @Override
     public String addStation(MesStation mesStation) {
+        mesStation.setId(GetUUID.getUUID());
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq("station_no", mesStation.getStationNo());
         List<MesEquipment> list = mesStationMapper.selectList(wrapper);
@@ -84,5 +86,10 @@ public class MesStationServiceImpl extends ServiceImpl<MesStationMapper, MesStat
         } else {
             return "删除失败";
         }
+    }
+
+    @Override
+    public List<MesStation> queryAllStation() {
+        return mesStationMapper.selectList(null);
     }
 }

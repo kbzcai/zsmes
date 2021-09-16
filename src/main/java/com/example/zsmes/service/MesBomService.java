@@ -23,4 +23,8 @@ public interface MesBomService extends IService<MesBom> {
     List<MesBom> queryByProductNo(String productNo);
 
     IPage<MesBom> queryByList(int page, int limit, BomCondition bomCondition);
+
+    String updateBom(MesBom mesBom);
+
+    MesBom queryByMaterialNo(String materialNo);
 }

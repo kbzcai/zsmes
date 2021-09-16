@@ -24,4 +24,6 @@ public interface MesStationService extends IService<MesStation> {
     String updateStation(MesStation mesStation);
 
     String deleteBySelectIds(List<String> deleteIds);
+
+    List<MesStation> queryAllStation();
 }

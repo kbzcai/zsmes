@@ -74,4 +74,31 @@ public class MesBomServiceImpl extends ServiceImpl<MesBomMapper, MesBom> impleme
         IPage<MesBom> bomIPage = mesBomMapper.selectPage(page, wrapper);
         return bomIPage;
     }
+
+    @Override
+    public String updateBom(MesBom mesBom) {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("material_no", mesBom.getMaterialNo());
+        List<MesBom> list = mesBomMapper.selectList(wrapper);
+        if (list.size() > 0) {
+            MesBom bom = list.get(0);
+            System.out.println(mesBom.getStationNo());
+            if(!StringUtils.isEmpty(mesBom.getStationNo()) && !mesBom.getStationNo().equals("")){
+                bom.setStationNo(mesBom.getStationNo());
+            }
+            bom.setMaterialDesc(mesBom.getMaterialDesc());
+            bom.setProductNum(mesBom.getProductNum());
+            mesBomMapper.updateById(bom);
+            return "修改成功";
+        }
+        return "修改失败！";
+    }
+
+    @Override
+    public MesBom queryByMaterialNo(String materialNo) {
+        QueryWrapper wrapper=new QueryWrapper();
+        wrapper.eq("material_no",materialNo);
+        List<MesBom> list = mesBomMapper.selectList(wrapper);
+        return list.get(0);
+    }
 }

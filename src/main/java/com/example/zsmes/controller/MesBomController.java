@@ -4,6 +4,7 @@ package com.example.zsmes.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.zsmes.entity.MesBom;
 import com.example.zsmes.entity.MesProduct;
+import com.example.zsmes.entity.MesStation;
 import com.example.zsmes.service.MesBomService;
 import com.example.zsmes.utils.ReadExcelUtil;
 import com.example.zsmes.vo.BomCondition;
@@ -41,6 +42,11 @@ public class MesBomController {
         return mesBomService.queryByProductNo(productNo);
     }
 
+    @GetMapping("/queryByMaterialNo/{materialNo}")
+    public MesBom queryByMaterialNo(@PathVariable("materialNo")String materialNo){
+        return mesBomService.queryByMaterialNo(materialNo);
+    }
+
     @PostMapping("/queryByList/{page}/{limit}")
     public BomVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false) BomCondition bomCondition){
         IPage<MesBom> bomIPage = mesBomService.queryByList(page, limit,bomCondition);
@@ -51,6 +57,12 @@ public class MesBomController {
         bomVO.setTotal(bomIPage.getTotal());
         bomVO.setPages(bomIPage.getPages());
         return bomVO;
+    }
+
+    @PutMapping("/updateBom")
+    public String updateBom(@RequestBody MesBom mesBom){
+        System.out.println(mesBom);
+        return mesBomService.updateBom(mesBom);
     }
 
     @PostMapping("/importBom")

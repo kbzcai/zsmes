@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.zsmes.entity.MesEquipment;
-import com.example.zsmes.entity.MesEquipmentFaultHistory;
 import com.example.zsmes.entity.MesEquipmentRepairHistory;
 import com.example.zsmes.mapper.MesEquipmentMapper;
 import com.example.zsmes.mapper.MesEquipmentRepairHistoryMapper;

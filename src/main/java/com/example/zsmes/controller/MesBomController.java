@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author cyj
@@ -38,19 +38,19 @@ public class MesBomController {
     private MesBomService mesBomService;
 
     @GetMapping("/queryByProductNo/{productNo}")
-    public List<MesBom> queryByProductNo(@PathVariable("productNo")String productNo){
+    public List<MesBom> queryByProductNo(@PathVariable("productNo") String productNo) {
         return mesBomService.queryByProductNo(productNo);
     }
 
     @GetMapping("/queryByMaterialNo/{materialNo}")
-    public MesBom queryByMaterialNo(@PathVariable("materialNo")String materialNo){
+    public MesBom queryByMaterialNo(@PathVariable("materialNo") String materialNo) {
         return mesBomService.queryByMaterialNo(materialNo);
     }
 
     @PostMapping("/queryByList/{page}/{limit}")
-    public BomVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false) BomCondition bomCondition){
-        IPage<MesBom> bomIPage = mesBomService.queryByList(page, limit,bomCondition);
-        BomVO bomVO=new BomVO();
+    public BomVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false) BomCondition bomCondition) {
+        IPage<MesBom> bomIPage = mesBomService.queryByList(page, limit, bomCondition);
+        BomVO bomVO = new BomVO();
         bomVO.setCurrent(page);
         bomVO.setData(bomIPage.getRecords());
         bomVO.setLimit(limit);
@@ -60,17 +60,24 @@ public class MesBomController {
     }
 
     @PutMapping("/updateBom")
-    public String updateBom(@RequestBody MesBom mesBom){
+    public String updateBom(@RequestBody MesBom mesBom) {
         System.out.println(mesBom);
         return mesBomService.updateBom(mesBom);
     }
 
     @PostMapping("/importBom")
-    public String importBom(@RequestParam("file") MultipartFile multipartFile){
+    public String importBom(@RequestParam("file") MultipartFile multipartFile) {
         log.info("导入bom表信息");
         List<Map<String, Object>> excelInfo = ReadExcelUtil.getExcelInfo(multipartFile, 0);
-        excelInfo.forEach(System.out::println);
-        return "importBom";
+        for (Map<String,Object> map:excelInfo
+             ) {
+            for (Map.Entry<String,Object> entry : map.entrySet()) {
+                System.out.print("Key = " + entry.getKey() + ", Value = " + entry.getValue()+" ");
+            }
+
+        }
+//        excelInfo.forEach(System.out::println);
+        return mesBomService.importBom(excelInfo);
     }
 }
 

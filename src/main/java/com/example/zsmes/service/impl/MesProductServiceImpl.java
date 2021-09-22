@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.zsmes.entity.MesPrimaryProducePlan;
 import com.example.zsmes.entity.MesProduct;
 import com.example.zsmes.entity.MesProductLine;
+import com.example.zsmes.mapper.MesBomMapper;
 import com.example.zsmes.mapper.MesPrimaryProducePlanMapper;
 import com.example.zsmes.mapper.MesProductLineMapper;
 import com.example.zsmes.mapper.MesProductMapper;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -39,6 +41,9 @@ public class MesProductServiceImpl extends ServiceImpl<MesProductMapper, MesProd
 
     @Autowired
     private MesProductMapper mesProductMapper;
+
+    @Autowired
+    private MesBomMapper mesBomMapper;
 
     @Override
     public Page<MesPrimaryProducePlan> queryPageList(String planno, String status, String stime, String etime, PageParam pageParam) {
@@ -180,6 +185,12 @@ public class MesProductServiceImpl extends ServiceImpl<MesProductMapper, MesProd
 
     @Override
     public String deleteBySelectIds(List<String> deleteIds) {
+        for (String id:deleteIds
+             ) {
+            QueryWrapper wrapper=new QueryWrapper();
+            wrapper.eq("product_no",mesProductMapper.selectById(id).getProductNo());
+            mesBomMapper.delete(wrapper);
+        }
         int sum = mesProductMapper.deleteBatchIds(deleteIds);
         if (sum > 0) {
             System.out.println(sum);

@@ -14,12 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author cyj
@@ -49,15 +48,15 @@ public class MesStationServiceImpl extends ServiceImpl<MesStationMapper, MesStat
     @Override
     public IPage<MesStation> queryByList(int currentpage, int limit, StationCondition stationCondition) {
         Page<MesStation> page = new Page<>(currentpage, limit);
-        QueryWrapper wrapper=new QueryWrapper();
-        String stationName=stationCondition.getStationName();
+        QueryWrapper wrapper = new QueryWrapper();
+        String stationName = stationCondition.getStationName();
         System.out.println(stationName);
-        String status=stationCondition.getStatus();
-        if(!StringUtils.isEmpty(stationName)){
-            wrapper.like("station_name",stationName);
+        String status = stationCondition.getStatus();
+        if (!StringUtils.isEmpty(stationName)) {
+            wrapper.like("station_name", stationName);
         }
-        if (!StringUtils.isEmpty(status)){
-            wrapper.eq("status",status);
+        if (!StringUtils.isEmpty(status)) {
+            wrapper.eq("status", status);
         }
         IPage<MesStation> stationIPage = mesStationMapper.selectPage(page, wrapper);
         return stationIPage;
@@ -75,7 +74,6 @@ public class MesStationServiceImpl extends ServiceImpl<MesStationMapper, MesStat
             mesStationMapper.updateById(station);
             return "修改成功";
         }
-
         return "修改失败，不存在该工位号的工位";
     }
 

@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author cyj
@@ -43,12 +43,12 @@ public class MesBomServiceImpl extends ServiceImpl<MesBomMapper, MesBom> impleme
 
     @Override
     public List<MesBom> changeToBomList(List<Map<String, Object>> bomList) {
-        for (Map<String,Object> map:bomList
-        ){
-            QueryWrapper wrapper=new QueryWrapper();
+        for (Map<String, Object> map : bomList
+        ) {
+            QueryWrapper wrapper = new QueryWrapper();
             wrapper.eq("station_name", map.get("工位"));
             MesStation mesStation = mesStationMapper.selectOne(wrapper);
-            map.put("工位",mesStation.getStationNo());
+            map.put("工位", mesStation.getStationNo());
         }
 
         return null;
@@ -56,8 +56,8 @@ public class MesBomServiceImpl extends ServiceImpl<MesBomMapper, MesBom> impleme
 
     @Override
     public List<MesBom> queryByProductNo(String productNo) {
-        QueryWrapper wrapper=new QueryWrapper();
-        wrapper.eq("product_no",productNo);
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("product_no", productNo);
         List list = mesBomMapper.selectList(wrapper);
         return list;
     }
@@ -65,16 +65,16 @@ public class MesBomServiceImpl extends ServiceImpl<MesBomMapper, MesBom> impleme
     @Override
     public IPage<MesBom> queryByList(int currentpage, int limit, BomCondition bomCondition) {
         Page<MesBom> page = new Page<>(currentpage, limit);
-        QueryWrapper wrapper=new QueryWrapper();
-        String productNo=bomCondition.getProductNo();
-        String materialNo=bomCondition.getMaterialNo();
+        QueryWrapper wrapper = new QueryWrapper();
+        String productNo = bomCondition.getProductNo();
+        String materialNo = bomCondition.getMaterialNo();
         System.out.println(productNo);
         System.out.println(materialNo);
-        if(!StringUtils.isEmpty(productNo)){
-            wrapper.like("product_no",productNo);
+        if (!StringUtils.isEmpty(productNo)) {
+            wrapper.like("product_no", productNo);
         }
-        if(!StringUtils.isEmpty(materialNo)){
-            wrapper.like("material_no",materialNo);
+        if (!StringUtils.isEmpty(materialNo)) {
+            wrapper.like("material_no", materialNo);
         }
         IPage<MesBom> bomIPage = mesBomMapper.selectPage(page, wrapper);
         return bomIPage;
@@ -88,7 +88,7 @@ public class MesBomServiceImpl extends ServiceImpl<MesBomMapper, MesBom> impleme
         if (list.size() > 0) {
             MesBom bom = list.get(0);
             System.out.println(mesBom.getStationNo());
-            if(!StringUtils.isEmpty(mesBom.getStationNo()) && !mesBom.getStationNo().equals("")){
+            if (!StringUtils.isEmpty(mesBom.getStationNo()) && !mesBom.getStationNo().equals("")) {
                 bom.setStationNo(mesBom.getStationNo());
             }
             bom.setMaterialDesc(mesBom.getMaterialDesc());
@@ -101,37 +101,39 @@ public class MesBomServiceImpl extends ServiceImpl<MesBomMapper, MesBom> impleme
 
     @Override
     public MesBom queryByMaterialNo(String materialNo) {
-        QueryWrapper wrapper=new QueryWrapper();
-        wrapper.eq("material_no",materialNo);
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("material_no", materialNo);
         List<MesBom> list = mesBomMapper.selectList(wrapper);
         return list.get(0);
     }
 
     @Override
     public String importBom(List<Map<String, Object>> excelInfo) {
-        Map<String,Object> productNoMap=excelInfo.get(1);
-        String productNo=(String) productNoMap.get("物料编码");
-        QueryWrapper wrapper=new QueryWrapper();
-        wrapper.eq("product_no",productNo);
+        Map<String, Object> productNoMap = excelInfo.get(1);
+        String productNo = (String) productNoMap.get("物料编码");
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("product_no", productNo);
         List list = mesProductMapper.selectList(wrapper);
-        if (list.size()>0){
+        if (list.size() > 0) {
             return "该产品已存在！";
-        }else {
-            MesProduct mesProduct=new MesProduct();
+        } else {
+            MesProduct mesProduct = new MesProduct();
             mesProduct.setId(GetUUID.getUUID());
             mesProduct.setProductNo(productNo);
             mesProduct.setStatus("1");
-            for (Map<String,Object> map: excelInfo
-                 ) {
-                if(!map.get("层次").toString().equals("1")&&!map.get("层次").toString().equals("2")) {
+            //添加
+            mesProductMapper.insert(mesProduct);
+            for (Map<String, Object> map : excelInfo
+            ) {
+                if (!map.get("层次").toString().equals("1") && !map.get("层次").toString().equals("2")) {
                     MesBom bom = new MesBom();
                     bom.setId(GetUUID.getUUID());
                     bom.setMaterialLevel(map.get("层次").toString());
-                    QueryWrapper wrapper1=new QueryWrapper();
-                    wrapper1.eq("station_name",map.get("工位").toString());
+                    QueryWrapper wrapper1 = new QueryWrapper();
+                    wrapper1.eq("station_name", map.get("工位").toString());
                     List<MesStation> list1 = mesStationMapper.selectList(wrapper1);
                     if (list1.size() > 0) {
-                        String stationNo=list1.get(0).getStationNo();
+                        String stationNo = list1.get(0).getStationNo();
                         bom.setStationNo(stationNo);
                     }
                     bom.setProductNo(productNo);
@@ -143,6 +145,8 @@ public class MesBomServiceImpl extends ServiceImpl<MesBomMapper, MesBom> impleme
                     bom.setProductWeight(map.get("重量(g)").toString());
                     bom.setManufacturer(map.get("使用单位").toString());
                     bom.setStatus("1");
+                    //添加
+                    mesBomMapper.insert(bom);
                     System.out.println(bom);
                 }
             }

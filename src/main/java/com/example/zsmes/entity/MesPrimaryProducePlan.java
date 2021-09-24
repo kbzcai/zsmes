@@ -3,6 +3,7 @@ package com.example.zsmes.entity;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
@@ -39,6 +40,7 @@ public class MesPrimaryProducePlan implements Serializable {
      */
       private String planNo;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime planDate;
 
       /**

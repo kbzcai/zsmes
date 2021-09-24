@@ -100,8 +100,8 @@ public class MesProductServiceImpl extends ServiceImpl<MesProductMapper, MesProd
 
     @Override
     public String deletePlanById(String id) {
-        MesPrimaryProducePlan plan=mesPrimaryProducePlanMapper.selectById(id);
-        if(plan == null){
+        MesPrimaryProducePlan plan = mesPrimaryProducePlanMapper.selectById(id);
+        if (plan == null) {
             return "删除失败，该计划不存在，请刷新";
         }
         mesPrimaryProducePlanMapper.deleteById(id);
@@ -146,26 +146,26 @@ public class MesProductServiceImpl extends ServiceImpl<MesProductMapper, MesProd
 
     @Override
     public MesProductLine queryNowProductLine() {
-        QueryWrapper wrapper=new QueryWrapper();
-        wrapper.eq("status",1);
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("status", 1);
         MesProductLine mesProductLine = mesProductLineMapper.selectOne(wrapper);
         return mesProductLine;
     }
 
     @Override
     public MesPrimaryProducePlan findPlanByPlanNo(String plan_no) {
-        QueryWrapper wrapper=new QueryWrapper();
-        wrapper.eq("plan_no",plan_no);
-        MesPrimaryProducePlan mesPrimaryProducePlan=mesPrimaryProducePlanMapper.selectOne(wrapper);
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("plan_no", plan_no);
+        MesPrimaryProducePlan mesPrimaryProducePlan = mesPrimaryProducePlanMapper.selectOne(wrapper);
         return mesPrimaryProducePlan;
     }
 
     @Override
     public String AutoFill(String plan_no) {
-        QueryWrapper wrapper=new QueryWrapper();
-        wrapper.eq("plan_no",plan_no);
-        MesPrimaryProducePlan mesPrimaryProducePlan=mesPrimaryProducePlanMapper.selectOne(wrapper);
-        mesPrimaryProducePlan.setPassNum(mesPrimaryProducePlan.getPlanNum()-mesPrimaryProducePlan.getFailNum());
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("plan_no", plan_no);
+        MesPrimaryProducePlan mesPrimaryProducePlan = mesPrimaryProducePlanMapper.selectOne(wrapper);
+        mesPrimaryProducePlan.setPassNum(mesPrimaryProducePlan.getPlanNum() - mesPrimaryProducePlan.getFailNum());
         mesPrimaryProducePlanMapper.updateById(mesPrimaryProducePlan);
         return "填充成功";
     }
@@ -173,11 +173,11 @@ public class MesProductServiceImpl extends ServiceImpl<MesProductMapper, MesProd
     @Override
     public IPage<MesProduct> queryByList(int currentpage, int limit, ProductCondition productCondition) {
         Page<MesProduct> page = new Page<>(currentpage, limit);
-        QueryWrapper wrapper=new QueryWrapper();
-        String productNo=productCondition.getProductNo();
+        QueryWrapper wrapper = new QueryWrapper();
+        String productNo = productCondition.getProductNo();
         System.out.println(productNo);
-        if(!StringUtils.isEmpty(productNo)){
-            wrapper.like("product_no",productNo);
+        if (!StringUtils.isEmpty(productNo)) {
+            wrapper.like("product_no", productNo);
         }
         IPage<MesProduct> productIPage = mesProductMapper.selectPage(page, wrapper);
         return productIPage;
@@ -185,10 +185,10 @@ public class MesProductServiceImpl extends ServiceImpl<MesProductMapper, MesProd
 
     @Override
     public String deleteBySelectIds(List<String> deleteIds) {
-        for (String id:deleteIds
-             ) {
-            QueryWrapper wrapper=new QueryWrapper();
-            wrapper.eq("product_no",mesProductMapper.selectById(id).getProductNo());
+        for (String id : deleteIds
+        ) {
+            QueryWrapper wrapper = new QueryWrapper();
+            wrapper.eq("product_no", mesProductMapper.selectById(id).getProductNo());
             mesBomMapper.delete(wrapper);
         }
         int sum = mesProductMapper.deleteBatchIds(deleteIds);

@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -29,4 +31,41 @@ public interface MesPrimaryProducePlanMapper extends BaseMapper<MesPrimaryProduc
 
     @Select("select sum(plan_num) from mes_primary_produce_plan ${ew.customSqlSegment}")
     Integer planCount(@Param(Constants.WRAPPER) Wrapper<MesPrimaryProducePlan> wrapper);
+
+
+    @Select("select * from mes_primary_produce_plan where to_days(plan_date) = to_days(now())")
+    List<MesPrimaryProducePlan> queryDayList();
+
+    @Select("select * from mes_primary_produce_plan where YEARWEEK(date_format(plan_date,'%Y-%m-%d')) = YEARWEEK(now())")
+    List<MesPrimaryProducePlan> queryWeekList();
+
+    @Select("select * from mes_primary_produce_plan where date_format(plan_date,'%Y%m') = date_format(CURDATE(),'%Y%m')")
+    List<MesPrimaryProducePlan> queryMonthList();
+
+    @Select("select sum(actual_num) from mes_primary_produce_plan where to_days(plan_date) = to_days(now())")
+    Integer queryActualNumDay();
+
+    @Select("select sum(actual_num) from mes_primary_produce_plan where YEARWEEK(date_format(plan_date,'%Y-%m-%d')) = YEARWEEK(now())")
+    Integer queryActualNumWeek();
+
+    @Select("select sum(actual_num) from mes_primary_produce_plan where date_format(plan_date,'%Y%m') = date_format(CURDATE(),'%Y%m')")
+    Integer queryActualNumMonth();
+
+    @Select("select sum(plan_num) from mes_primary_produce_plan where to_days(plan_date) = to_days(now())")
+    Integer queryPlanNumDay();
+
+    @Select("select sum(plan_num) from mes_primary_produce_plan where YEARWEEK(date_format(plan_date,'%Y-%m-%d')) = YEARWEEK(now())")
+    Integer queryPlanNumWeek();
+
+    @Select("select sum(plan_num) from mes_primary_produce_plan where date_format(plan_date,'%Y%m') = date_format(CURDATE(),'%Y%m')")
+    Integer queryPlanNumMonth();
+
+    @Select("select sum(fail_num) from mes_primary_produce_plan where to_days(plan_date) = to_days(now())")
+    Integer queryFailNumDay();
+
+    @Select("select sum(fail_num) from mes_primary_produce_plan where YEARWEEK(date_format(plan_date,'%Y-%m-%d')) = YEARWEEK(now())")
+    Integer queryFailNumWeek();
+
+    @Select("select sum(fail_num) from mes_primary_produce_plan where date_format(plan_date,'%Y%m') = date_format(CURDATE(),'%Y%m')")
+    Integer queryFailNumMonth();
 }

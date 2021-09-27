@@ -5,14 +5,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.zsmes.entity.MesEquipment;
 import com.example.zsmes.entity.MesPrimaryProducePlan;
 import com.example.zsmes.service.MesPrimaryProducePlanService;
-import com.example.zsmes.vo.EquipmentCondition;
-import com.example.zsmes.vo.EquipmentVO;
-import com.example.zsmes.vo.PlanCondition;
-import com.example.zsmes.vo.PlanVO;
+import com.example.zsmes.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
 
 /**
  * <p>
@@ -39,6 +38,28 @@ public class MesPrimaryProducePlanController {
         planVO.setTotal(primaryProducePlanIPage.getTotal());
         planVO.setPages(primaryProducePlanIPage.getPages());
         return planVO;
+    }
+
+    @PostMapping("/addPlan")
+    public String addPlan(@RequestBody MesPrimaryProducePlan mesPrimaryProducePlan){
+        return mesPrimaryProducePlanService.addPlan(mesPrimaryProducePlan);
+    }
+
+    @GetMapping("/autoFillPlanById/{id}")
+    public String autoFillPlanById(@PathVariable("id") Long id){
+        return mesPrimaryProducePlanService.autoFillPlanById(id);
+    }
+
+    @PutMapping("/updatePlan")
+    public String updatePlan(@RequestBody MesPrimaryProducePlan mesPrimaryProducePlan){
+        return mesPrimaryProducePlanService.updatePlan(mesPrimaryProducePlan);
+    }
+
+    @GetMapping("/query")
+    public PlanDataVo getPlanData(){
+        PlanDataVo planData = mesPrimaryProducePlanService.getPlanData();
+        System.out.println(planData);
+        return planData;
     }
 }
 

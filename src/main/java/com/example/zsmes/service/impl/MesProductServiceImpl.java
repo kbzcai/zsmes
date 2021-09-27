@@ -200,5 +200,10 @@ public class MesProductServiceImpl extends ServiceImpl<MesProductMapper, MesProd
         }
     }
 
+    @Override
+    public List<MesProduct> queryAllProduct() {
+        return mesProductMapper.selectList(null);
+    }
+
 
 }

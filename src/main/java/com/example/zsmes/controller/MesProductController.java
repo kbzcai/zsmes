@@ -2,10 +2,7 @@ package com.example.zsmes.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.example.zsmes.entity.MesEquipmentRepairHistory;
-import com.example.zsmes.entity.MesPrimaryProducePlan;
-import com.example.zsmes.entity.MesProduct;
-import com.example.zsmes.entity.MesProductLine;
+import com.example.zsmes.entity.*;
 import com.example.zsmes.service.MesProductService;
 import com.example.zsmes.utils.GetFirstDayAndLastDay;
 import com.example.zsmes.utils.GetMondayAndSunday;
@@ -62,6 +59,11 @@ public class MesProductController {
     @DeleteMapping("/deleteBySelectIds/{deleteIds}")
     public String deleteBySelectIds(@PathVariable("deleteIds") List<String> deleteIds){
         return mesProductService.deleteBySelectIds(deleteIds);
+    }
+
+    @GetMapping("/queryAllProduct")
+    public List<MesProduct> queryAllProduct(){
+        return mesProductService.queryAllProduct();
     }
 }
 

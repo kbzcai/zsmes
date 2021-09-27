@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author cyj
@@ -27,14 +27,14 @@ public class MesStationController {
     private MesStationService mesStationService;
 
     @PostMapping("/addStation")
-    public String addStation(@RequestBody MesStation mesStation){
+    public String addStation(@RequestBody MesStation mesStation) {
         return mesStationService.addStation(mesStation);
     }
 
     @PostMapping("/queryByList/{page}/{limit}")
-    public StationVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false) StationCondition stationCondition){
-        IPage<MesStation> stationIPage = mesStationService.queryByList(page, limit,stationCondition);
-        StationVO stationVO=new StationVO();
+    public StationVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false) StationCondition stationCondition) {
+        IPage<MesStation> stationIPage = mesStationService.queryByList(page, limit, stationCondition);
+        StationVO stationVO = new StationVO();
         stationVO.setCurrent(page);
         stationVO.setData(stationIPage.getRecords());
         stationVO.setLimit(limit);
@@ -44,17 +44,17 @@ public class MesStationController {
     }
 
     @GetMapping("/queryAllStation")
-    public List<MesStation> queryAllStation(){
+    public List<MesStation> queryAllStation() {
         return mesStationService.queryAllStation();
     }
 
     @PutMapping("/updateStation")
-    public String updateStation(@RequestBody MesStation mesStation){
+    public String updateStation(@RequestBody MesStation mesStation) {
         return mesStationService.updateStation(mesStation);
     }
 
     @DeleteMapping("/deleteBySelectIds/{deleteIds}")
-    public String deleteBySelectIds(@PathVariable("deleteIds") List<String> deleteIds){
+    public String deleteBySelectIds(@PathVariable("deleteIds") List<String> deleteIds) {
         return mesStationService.deleteBySelectIds(deleteIds);
     }
 }

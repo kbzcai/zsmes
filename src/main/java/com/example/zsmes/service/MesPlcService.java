@@ -2,6 +2,7 @@ package com.example.zsmes.service;
 
 import com.example.zsmes.entity.MesPlc;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.zsmes.vo.PlcDataNumVo;
 import com.example.zsmes.vo.PlcDataVo;
 
 import java.util.List;
@@ -16,4 +17,6 @@ import java.util.List;
  */
 public interface MesPlcService extends IService<MesPlc> {
     public List<PlcDataVo> getPlcData();
+
+    List<PlcDataNumVo> getNum();
 }

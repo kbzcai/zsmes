@@ -5,6 +5,7 @@ import com.example.zsmes.entity.*;
 import com.example.zsmes.mapper.*;
 import com.example.zsmes.service.MesPlcService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.zsmes.vo.PlcDataNumVo;
 import com.example.zsmes.vo.PlcDataVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -154,6 +155,27 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         list.add(plcDataVo5);
         list.add(plcDataVo6);
 
+        return list;
+    }
+
+    @Override
+    public List<PlcDataNumVo> getNum() {
+        List<PlcDataNumVo> list = new ArrayList<>();
+
+        QueryWrapper wrapper = new QueryWrapper();
+        MesPlc plc1 = mesPlcMapper.getNumData(wrapper);
+        System.out.println();
+        MesPlcR2 plc2 = mesPlcR2Mapper.getNumData(wrapper);
+        MesPlcR3 plc3 = mesPlcR3Mapper.getNumData(wrapper);
+        MesPlcR4 plc4 = mesPlcR4Mapper.getNumData(wrapper);
+        MesPlcR5 plc5 = mesPlcR5Mapper.getNumData(wrapper);
+        MesPlcR6 plc6 = mesPlcR6Mapper.getNumData(wrapper);
+        list.add(new PlcDataNumVo(plc1.getProdNum(),plc1.getProdNumb()));
+        list.add(new PlcDataNumVo(plc2.getProdNum(),plc2.getProdNumb()));
+        list.add(new PlcDataNumVo(plc3.getProdNum(),plc3.getProdNumb()));
+        list.add(new PlcDataNumVo(plc4.getProdNum(),plc4.getProdNumb()));
+        list.add(new PlcDataNumVo(plc5.getProdNum(),plc5.getProdNumb()));
+        list.add(new PlcDataNumVo(plc6.getProdNum(),plc6.getProdNumb()));
         return list;
     }
 }

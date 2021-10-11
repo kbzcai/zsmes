@@ -22,4 +22,7 @@ import java.util.List;
 public interface MesPlcMapper extends BaseMapper<MesPlc> {
     @Select("SELECT * FROM mes_plc ${ew.customSqlSegment} WHERE id > (SELECT MAX(id) FROM mes_plc) - 20")
     List<MesPlc> getLastestData(@Param(Constants.WRAPPER) Wrapper<MesPlc> wrapper);
+
+    @Select("SELECT * FROM mes_plc ${ew.customSqlSegment} order by create_time desc LIMIT 1")
+    MesPlc getNumData(@Param(Constants.WRAPPER) Wrapper<MesPlc> wrapper);
 }

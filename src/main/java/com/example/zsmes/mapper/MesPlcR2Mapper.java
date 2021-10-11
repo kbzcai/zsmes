@@ -24,4 +24,7 @@ public interface MesPlcR2Mapper extends BaseMapper<MesPlcR2> {
 
     @Select("SELECT * FROM mes_plc_r2 ${ew.customSqlSegment} WHERE id > (SELECT MAX(id) FROM mes_plc_r2) - 20")
     List<MesPlcR2> getLastestData(@Param(Constants.WRAPPER) Wrapper<MesPlcR2> wrapper);
+
+    @Select("SELECT * FROM mes_plc_r2 ${ew.customSqlSegment} order by create_time desc LIMIT 1")
+    MesPlcR2 getNumData(@Param(Constants.WRAPPER) Wrapper<MesPlcR2> wrapper);
 }

@@ -3,6 +3,7 @@ package com.example.zsmes.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.example.zsmes.entity.MesPlc;
+import com.example.zsmes.entity.MesPlcR3;
 import com.example.zsmes.entity.MesPlcR6;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -24,4 +25,7 @@ public interface MesPlcR6Mapper extends BaseMapper<MesPlcR6> {
 
     @Select("SELECT * FROM mes_plc_r6 ${ew.customSqlSegment} WHERE id > (SELECT MAX(id) FROM mes_plc_r6) - 20")
     List<MesPlcR6> getLastestData(@Param(Constants.WRAPPER) Wrapper<MesPlcR6> wrapper);
+
+    @Select("SELECT * FROM mes_plc_r6 ${ew.customSqlSegment} order by create_time desc LIMIT 1")
+    MesPlcR6 getNumData(@Param(Constants.WRAPPER) Wrapper<MesPlcR6> wrapper);
 }

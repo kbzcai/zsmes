@@ -83,50 +83,47 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
 
     @Override
     public String updatePlan(MesPrimaryProducePlan mesPrimaryProducePlan) {
-        QueryWrapper wrapper=new QueryWrapper();
-        wrapper.eq("plan_no",mesPrimaryProducePlan.getPlanNo());
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("plan_no", mesPrimaryProducePlan.getPlanNo());
         List<MesPrimaryProducePlan> list = mesPrimaryProducePlanMapper.selectList(wrapper);
-        MesPrimaryProducePlan plan=list.get(0);
-        plan.setPlanSchedule(mesPrimaryProducePlan.getPlanSchedule());
-        plan.setPlanNum(mesPrimaryProducePlan.getPlanNum());
-        if (mesPrimaryProducePlan.getActualNum()<=mesPrimaryProducePlan.getPlanNum() &&
-                mesPrimaryProducePlan.getFailNum()<=mesPrimaryProducePlan.getPlanNum() &&
-                mesPrimaryProducePlan.getActualNum()+mesPrimaryProducePlan.getFailNum()<=
-                mesPrimaryProducePlan.getPlanNum()){
+        MesPrimaryProducePlan plan = list.get(0);
+        if (mesPrimaryProducePlan.getActualNum() <= mesPrimaryProducePlan.getPlanNum() &&
+                mesPrimaryProducePlan.getFailNum() <= mesPrimaryProducePlan.getPlanNum() &&
+                mesPrimaryProducePlan.getActualNum() + mesPrimaryProducePlan.getFailNum() <=
+                        mesPrimaryProducePlan.getPlanNum()) {
             plan.setActualNum(mesPrimaryProducePlan.getActualNum());
             plan.setFailNum(mesPrimaryProducePlan.getFailNum());
-            if( mesPrimaryProducePlan.getActualNum()+mesPrimaryProducePlan.getFailNum()==
-                    mesPrimaryProducePlan.getPlanNum()){
+            if (mesPrimaryProducePlan.getActualNum() + mesPrimaryProducePlan.getFailNum() ==
+                    mesPrimaryProducePlan.getPlanNum()) {
                 plan.setPlanStatus("1");
                 plan.setStatus("1");
-            }else {
+            } else {
                 plan.setPlanStatus("0");
                 plan.setStatus("0");
             }
             plan.setPlanDate(mesPrimaryProducePlan.getPlanDate());
             mesPrimaryProducePlanMapper.updateById(plan);
             return "修改成功";
-        }else{
+        } else {
             return "请检查输入数量是否正清并合理";
         }
-
     }
 
     @Override
     public PlanDataVo getPlanData() {
-        PlanDataVo planDataVo=new PlanDataVo();
-        List<Integer> actualNumList=new ArrayList<>();
-        List<Integer> planNumList=new ArrayList<>();
-        List<Integer> failNumList=new ArrayList<>();
-        for (MesPrimaryProducePlan plan:mesPrimaryProducePlanMapper.queryDayList()
-             ) {
-            System.out.println(plan);
-        }
-        for (MesPrimaryProducePlan plan:mesPrimaryProducePlanMapper.queryWeekList()
+        PlanDataVo planDataVo = new PlanDataVo();
+        List<Integer> actualNumList = new ArrayList<>();
+        List<Integer> planNumList = new ArrayList<>();
+        List<Integer> failNumList = new ArrayList<>();
+        for (MesPrimaryProducePlan plan : mesPrimaryProducePlanMapper.queryDayList()
         ) {
             System.out.println(plan);
         }
-        for (MesPrimaryProducePlan plan:mesPrimaryProducePlanMapper.queryMonthList()
+        for (MesPrimaryProducePlan plan : mesPrimaryProducePlanMapper.queryWeekList()
+        ) {
+            System.out.println(plan);
+        }
+        for (MesPrimaryProducePlan plan : mesPrimaryProducePlanMapper.queryMonthList()
         ) {
             System.out.println(plan);
         }

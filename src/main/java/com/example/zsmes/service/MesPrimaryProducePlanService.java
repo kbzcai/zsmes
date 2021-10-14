@@ -27,4 +27,6 @@ public interface MesPrimaryProducePlanService extends IService<MesPrimaryProduce
     String updatePlan(MesPrimaryProducePlan mesPrimaryProducePlan);
 
     PlanDataVo getPlanData();
+
+    String deleteBySelectIds(List<String> deleteIds);
 }

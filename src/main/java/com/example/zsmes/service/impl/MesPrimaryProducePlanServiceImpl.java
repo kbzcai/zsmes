@@ -91,6 +91,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
                 mesPrimaryProducePlan.getFailNum() <= mesPrimaryProducePlan.getPlanNum() &&
                 mesPrimaryProducePlan.getActualNum() + mesPrimaryProducePlan.getFailNum() <=
                         mesPrimaryProducePlan.getPlanNum()) {
+            plan.setPlanNum(mesPrimaryProducePlan.getPlanNum());
             plan.setActualNum(mesPrimaryProducePlan.getActualNum());
             plan.setFailNum(mesPrimaryProducePlan.getFailNum());
             if (mesPrimaryProducePlan.getActualNum() + mesPrimaryProducePlan.getFailNum() ==
@@ -102,6 +103,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
                 plan.setStatus("0");
             }
             plan.setPlanDate(mesPrimaryProducePlan.getPlanDate());
+            plan.setPlanSchedule(mesPrimaryProducePlan.getPlanSchedule());
             mesPrimaryProducePlanMapper.updateById(plan);
             return "修改成功";
         } else {
@@ -140,5 +142,16 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
         planDataVo.setPlanNumList(planNumList);
         planDataVo.setFailNumList(failNumList);
         return planDataVo;
+    }
+
+    @Override
+    public String deleteBySelectIds(List<String> deleteIds) {
+        int sum = mesPrimaryProducePlanMapper.deleteBatchIds(deleteIds);
+        if (sum > 0) {
+            System.out.println(sum);
+            return "删除成功";
+        } else {
+            return "删除失败";
+        }
     }
 }

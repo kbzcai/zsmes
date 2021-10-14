@@ -52,6 +52,8 @@ public class MesPrimaryProducePlanController {
 
     @PutMapping("/updatePlan")
     public String updatePlan(@RequestBody MesPrimaryProducePlan mesPrimaryProducePlan){
+        System.out.println("-----------------------------------");
+        System.out.println(mesPrimaryProducePlan);
         return mesPrimaryProducePlanService.updatePlan(mesPrimaryProducePlan);
     }
 
@@ -60,6 +62,11 @@ public class MesPrimaryProducePlanController {
         PlanDataVo planData = mesPrimaryProducePlanService.getPlanData();
         System.out.println(planData);
         return planData;
+    }
+
+    @DeleteMapping("/deleteBySelectIds/{deleteIds}")
+    public String deleteBySelectIds(@PathVariable("deleteIds") List<String> deleteIds){
+        return mesPrimaryProducePlanService.deleteBySelectIds(deleteIds);
     }
 }
 

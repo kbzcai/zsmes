@@ -43,6 +43,18 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
     @Autowired
     private MesPlcR6Mapper mesPlcR6Mapper;
 
+    @Autowired
+    private MesPlcR7Mapper mesPlcR7Mapper;
+
+    @Autowired
+    private MesPlcR8Mapper mesPlcR8Mapper;
+
+    @Autowired
+    private MesPlcR9Mapper mesPlcR9Mapper;
+
+    @Autowired
+    private MesPlcR10Mapper mesPlcR10Mapper;
+
     @Override
     public List<PlcDataVo> getPlcData() {
         List<PlcDataVo> list = new ArrayList<>();
@@ -54,6 +66,10 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         List<MesPlcR4> data4 = mesPlcR4Mapper.getLastestData(wrapper);
         List<MesPlcR5> data5 = mesPlcR5Mapper.getLastestData(wrapper);
         List<MesPlcR6> data6 = mesPlcR6Mapper.getLastestData(wrapper);
+        List<MesPlcR7> data7 = mesPlcR7Mapper.getLastestData(wrapper);
+        List<MesPlcR8> data8 = mesPlcR8Mapper.getLastestData(wrapper);
+        List<MesPlcR9> data9 = mesPlcR9Mapper.getLastestData(wrapper);
+        List<MesPlcR10> data10 = mesPlcR10Mapper.getLastestData(wrapper);
 
         PlcDataVo plcDataVo = new PlcDataVo();
         PlcDataVo plcDataVo2 = new PlcDataVo();
@@ -61,6 +77,10 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         PlcDataVo plcDataVo4 = new PlcDataVo();
         PlcDataVo plcDataVo5 = new PlcDataVo();
         PlcDataVo plcDataVo6 = new PlcDataVo();
+        PlcDataVo plcDataVo7 = new PlcDataVo();
+        PlcDataVo plcDataVo8 = new PlcDataVo();
+        PlcDataVo plcDataVo9 = new PlcDataVo();
+        PlcDataVo plcDataVo10 = new PlcDataVo();
 
         plcDataVo.setPlcName("plc1");
         plcDataVo2.setPlcName("plc2");
@@ -68,6 +88,10 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         plcDataVo4.setPlcName("plc4");
         plcDataVo5.setPlcName("plc5");
         plcDataVo6.setPlcName("plc6");
+        plcDataVo7.setPlcName("plc7");
+        plcDataVo8.setPlcName("plc8");
+        plcDataVo9.setPlcName("plc9");
+        plcDataVo10.setPlcName("plc10");
 
         List<String> plcElectricList = new ArrayList<>();
         List<String> plcVoltageList = new ArrayList<>();
@@ -84,9 +108,22 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         List<String> plcElectricList5 = new ArrayList<>();
         List<String> plcVoltageList5 = new ArrayList<>();
         List<LocalDateTime> plctimeList5 = new ArrayList<>();
+
         List<String> plcElectricList6 = new ArrayList<>();
         List<String> plcVoltageList6 = new ArrayList<>();
         List<LocalDateTime> plctimeList6 = new ArrayList<>();
+        List<String> plcElectricList7 = new ArrayList<>();
+        List<String> plcVoltageList7 = new ArrayList<>();
+        List<LocalDateTime> plctimeList7 = new ArrayList<>();
+        List<String> plcElectricList8 = new ArrayList<>();
+        List<String> plcVoltageList8 = new ArrayList<>();
+        List<LocalDateTime> plctimeList8 = new ArrayList<>();
+        List<String> plcElectricList9 = new ArrayList<>();
+        List<String> plcVoltageList9 = new ArrayList<>();
+        List<LocalDateTime> plctimeList9 = new ArrayList<>();
+        List<String> plcElectricList10 = new ArrayList<>();
+        List<String> plcVoltageList10 = new ArrayList<>();
+        List<LocalDateTime> plctimeList10 = new ArrayList<>();
 
         for (MesPlc mesplc : data1
         ) {
@@ -148,12 +185,56 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         plcDataVo6.setPlcVoltage(plcVoltageList6);
         plcDataVo6.setTime(plctimeList6);
 
+        for (MesPlcR7 mesplc : data7
+        ) {
+            plcElectricList7.add(mesplc.getR1Electric());
+            plcVoltageList7.add(mesplc.getR1Voltage());
+            plctimeList7.add(mesplc.getCreateTime());
+        }
+        plcDataVo7.setPlcElectric(plcElectricList7);
+        plcDataVo7.setPlcVoltage(plcVoltageList7);
+        plcDataVo7.setTime(plctimeList7);
+
+        for (MesPlcR8 mesplc : data8
+        ) {
+            plcElectricList8.add(mesplc.getR1Electric());
+            plcVoltageList8.add(mesplc.getR1Voltage());
+            plctimeList8.add(mesplc.getCreateTime());
+        }
+        plcDataVo8.setPlcElectric(plcElectricList8);
+        plcDataVo8.setPlcVoltage(plcVoltageList8);
+        plcDataVo8.setTime(plctimeList8);
+
+        for (MesPlcR9 mesplc : data9
+        ) {
+            plcElectricList9.add(mesplc.getR1Electric());
+            plcVoltageList9.add(mesplc.getR1Voltage());
+            plctimeList9.add(mesplc.getCreateTime());
+        }
+        plcDataVo9.setPlcElectric(plcElectricList9);
+        plcDataVo9.setPlcVoltage(plcVoltageList9);
+        plcDataVo9.setTime(plctimeList9);
+
+        for (MesPlcR10 mesplc : data10
+        ) {
+            plcElectricList10.add(mesplc.getR1Electric());
+            plcVoltageList10.add(mesplc.getR1Voltage());
+            plctimeList10.add(mesplc.getCreateTime());
+        }
+        plcDataVo10.setPlcElectric(plcElectricList10);
+        plcDataVo10.setPlcVoltage(plcVoltageList10);
+        plcDataVo10.setTime(plctimeList10);
+
         list.add(plcDataVo);
         list.add(plcDataVo2);
         list.add(plcDataVo3);
         list.add(plcDataVo4);
         list.add(plcDataVo5);
         list.add(plcDataVo6);
+        list.add(plcDataVo7);
+        list.add(plcDataVo8);
+        list.add(plcDataVo9);
+        list.add(plcDataVo10);
 
         return list;
     }
@@ -170,12 +251,20 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         MesPlcR4 plc4 = mesPlcR4Mapper.getNumData(wrapper);
         MesPlcR5 plc5 = mesPlcR5Mapper.getNumData(wrapper);
         MesPlcR6 plc6 = mesPlcR6Mapper.getNumData(wrapper);
-        list.add(new PlcDataNumVo(plc1.getProdNum(),plc1.getProdNumb()));
-        list.add(new PlcDataNumVo(plc2.getProdNum(),plc2.getProdNumb()));
-        list.add(new PlcDataNumVo(plc3.getProdNum(),plc3.getProdNumb()));
-        list.add(new PlcDataNumVo(plc4.getProdNum(),plc4.getProdNumb()));
-        list.add(new PlcDataNumVo(plc5.getProdNum(),plc5.getProdNumb()));
-        list.add(new PlcDataNumVo(plc6.getProdNum(),plc6.getProdNumb()));
+        MesPlcR7 plc7 = mesPlcR7Mapper.getNumData(wrapper);
+        MesPlcR8 plc8 = mesPlcR8Mapper.getNumData(wrapper);
+        MesPlcR9 plc9 = mesPlcR9Mapper.getNumData(wrapper);
+        MesPlcR10 plc10 = mesPlcR10Mapper.getNumData(wrapper);
+        list.add(new PlcDataNumVo(plc1.getProdNum(), plc1.getProdNumb()));
+        list.add(new PlcDataNumVo(plc2.getProdNum(), plc2.getProdNumb()));
+        list.add(new PlcDataNumVo(plc3.getProdNum(), plc3.getProdNumb()));
+        list.add(new PlcDataNumVo(plc4.getProdNum(), plc4.getProdNumb()));
+        list.add(new PlcDataNumVo(plc5.getProdNum(), plc5.getProdNumb()));
+        list.add(new PlcDataNumVo(plc6.getProdNum(), plc6.getProdNumb()));
+        list.add(new PlcDataNumVo(plc7.getProdNum(), plc7.getProdNumb()));
+        list.add(new PlcDataNumVo(plc8.getProdNum(), plc8.getProdNumb()));
+        list.add(new PlcDataNumVo(plc9.getProdNum(), plc9.getProdNumb()));
+        list.add(new PlcDataNumVo(plc10.getProdNum(), plc10.getProdNumb()));
         return list;
     }
 }

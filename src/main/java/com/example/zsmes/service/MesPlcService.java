@@ -19,4 +19,6 @@ public interface MesPlcService extends IService<MesPlc> {
     public List<PlcDataVo> getPlcData();
 
     List<PlcDataNumVo> getNum();
+
+    PlcDataVo queryByNum(Integer num);
 }

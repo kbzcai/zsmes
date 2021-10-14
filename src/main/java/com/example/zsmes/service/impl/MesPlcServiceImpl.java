@@ -7,6 +7,7 @@ import com.example.zsmes.service.MesPlcService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.zsmes.vo.PlcDataNumVo;
 import com.example.zsmes.vo.PlcDataVo;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -266,5 +267,136 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         list.add(new PlcDataNumVo(plc9.getProdNum(), plc9.getProdNumb()));
         list.add(new PlcDataNumVo(plc10.getProdNum(), plc10.getProdNumb()));
         return list;
+    }
+
+    @Override
+    public PlcDataVo queryByNum(Integer num) {
+        PlcDataVo plcDataVo = new PlcDataVo();
+        QueryWrapper wrapper = new QueryWrapper();
+        List<String> plcElectricList = new ArrayList<>();
+        List<String> plcVoltageList = new ArrayList<>();
+        List<LocalDateTime> timeList = new ArrayList<>();
+        if (num.equals(1)) {
+            plcDataVo.setPlcName("plc1");
+            List<MesPlc> data = mesPlcMapper.getLastestData(wrapper);
+            for (MesPlc plcData : data
+            ) {
+                plcElectricList.add(plcData.getR1Electric());
+                plcVoltageList.add(plcData.getR1Voltage());
+                timeList.add(plcData.getCreateTime());
+            }
+            plcDataVo.setPlcElectric(plcElectricList);
+            plcDataVo.setPlcVoltage(plcVoltageList);
+            plcDataVo.setTime(timeList);
+        } else if (num.equals(2)) {
+            plcDataVo.setPlcName("plc2");
+            List<MesPlcR2> data = mesPlcR2Mapper.getLastestData(wrapper);
+            for (MesPlcR2 plcData : data
+            ) {
+                plcElectricList.add(plcData.getR1Electric());
+                plcVoltageList.add(plcData.getR1Voltage());
+                timeList.add(plcData.getCreateTime());
+            }
+            plcDataVo.setPlcElectric(plcElectricList);
+            plcDataVo.setPlcVoltage(plcVoltageList);
+            plcDataVo.setTime(timeList);
+        } else if (num.equals(3)) {
+            plcDataVo.setPlcName("plc3");
+            List<MesPlcR3> data = mesPlcR3Mapper.getLastestData(wrapper);
+            for (MesPlcR3 plcData : data
+            ) {
+                plcElectricList.add(plcData.getR1Electric());
+                plcVoltageList.add(plcData.getR1Voltage());
+                timeList.add(plcData.getCreateTime());
+            }
+            plcDataVo.setPlcElectric(plcElectricList);
+            plcDataVo.setPlcVoltage(plcVoltageList);
+            plcDataVo.setTime(timeList);
+        } else if (num.equals(4)) {
+            plcDataVo.setPlcName("plc4");
+            List<MesPlcR4> data = mesPlcR4Mapper.getLastestData(wrapper);
+            for (MesPlcR4 plcData : data
+            ) {
+                plcElectricList.add(plcData.getR1Electric());
+                plcVoltageList.add(plcData.getR1Voltage());
+                timeList.add(plcData.getCreateTime());
+            }
+            plcDataVo.setPlcElectric(plcElectricList);
+            plcDataVo.setPlcVoltage(plcVoltageList);
+            plcDataVo.setTime(timeList);
+        } else if (num.equals(5)) {
+            plcDataVo.setPlcName("plc5");
+            List<MesPlcR5> data = mesPlcR5Mapper.getLastestData(wrapper);
+            for (MesPlcR5 plcData : data
+            ) {
+                plcElectricList.add(plcData.getR1Electric());
+                plcVoltageList.add(plcData.getR1Voltage());
+                timeList.add(plcData.getCreateTime());
+            }
+            plcDataVo.setPlcElectric(plcElectricList);
+            plcDataVo.setPlcVoltage(plcVoltageList);
+            plcDataVo.setTime(timeList);
+        } else if (num.equals(6)) {
+            plcDataVo.setPlcName("plc6");
+            List<MesPlcR6> data = mesPlcR6Mapper.getLastestData(wrapper);
+            for (MesPlcR6 plcData : data
+            ) {
+                plcElectricList.add(plcData.getR1Electric());
+                plcVoltageList.add(plcData.getR1Voltage());
+                timeList.add(plcData.getCreateTime());
+            }
+            plcDataVo.setPlcElectric(plcElectricList);
+            plcDataVo.setPlcVoltage(plcVoltageList);
+            plcDataVo.setTime(timeList);
+        } else if (num.equals(7)) {
+            plcDataVo.setPlcName("plc7");
+            List<MesPlcR7> data = mesPlcR7Mapper.getLastestData(wrapper);
+            for (MesPlcR7 plcData : data
+            ) {
+                plcElectricList.add(plcData.getR1Electric());
+                plcVoltageList.add(plcData.getR1Voltage());
+                timeList.add(plcData.getCreateTime());
+            }
+            plcDataVo.setPlcElectric(plcElectricList);
+            plcDataVo.setPlcVoltage(plcVoltageList);
+            plcDataVo.setTime(timeList);
+        } else if (num.equals(8)) {
+            plcDataVo.setPlcName("plc8");
+            List<MesPlcR8> data = mesPlcR8Mapper.getLastestData(wrapper);
+            for (MesPlcR8 plcData : data
+            ) {
+                plcElectricList.add(plcData.getR1Electric());
+                plcVoltageList.add(plcData.getR1Voltage());
+                timeList.add(plcData.getCreateTime());
+            }
+            plcDataVo.setPlcElectric(plcElectricList);
+            plcDataVo.setPlcVoltage(plcVoltageList);
+            plcDataVo.setTime(timeList);
+        } else if (num.equals(9)) {
+            plcDataVo.setPlcName("plc9");
+            List<MesPlcR9> data = mesPlcR9Mapper.getLastestData(wrapper);
+            for (MesPlcR9 plcData : data
+            ) {
+                plcElectricList.add(plcData.getR1Electric());
+                plcVoltageList.add(plcData.getR1Voltage());
+                timeList.add(plcData.getCreateTime());
+            }
+            plcDataVo.setPlcElectric(plcElectricList);
+            plcDataVo.setPlcVoltage(plcVoltageList);
+            plcDataVo.setTime(timeList);
+        } else {
+            plcDataVo.setPlcName("plc10");
+            List<MesPlcR10> data = mesPlcR10Mapper.getLastestData(wrapper);
+            for (MesPlcR10 plcData : data
+            ) {
+                plcElectricList.add(plcData.getR1Electric());
+                plcVoltageList.add(plcData.getR1Voltage());
+                timeList.add(plcData.getCreateTime());
+            }
+            plcDataVo.setPlcElectric(plcElectricList);
+            plcDataVo.setPlcVoltage(plcVoltageList);
+            plcDataVo.setTime(timeList);
+        }
+        return plcDataVo;
     }
 }

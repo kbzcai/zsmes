@@ -3,19 +3,14 @@ package com.example.zsmes.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.zsmes.entity.MesBom;
-import com.example.zsmes.entity.MesProduct;
-import com.example.zsmes.entity.MesStation;
 import com.example.zsmes.service.MesBomService;
 import com.example.zsmes.utils.ReadExcelUtil;
 import com.example.zsmes.vo.BomCondition;
 import com.example.zsmes.vo.BomVO;
-import com.example.zsmes.vo.ProductCondition;
-import com.example.zsmes.vo.ProductVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -74,7 +69,6 @@ public class MesBomController {
             for (Map.Entry<String,Object> entry : map.entrySet()) {
                 System.out.print("Key = " + entry.getKey() + ", Value = " + entry.getValue()+" ");
             }
-
         }
 //        excelInfo.forEach(System.out::println);
         return mesBomService.importBom(excelInfo);

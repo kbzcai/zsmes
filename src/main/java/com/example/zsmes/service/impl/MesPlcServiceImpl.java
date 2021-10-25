@@ -398,5 +398,6 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
             plcDataVo.setTime(timeList);
         }
         return plcDataVo;
+
     }
 }

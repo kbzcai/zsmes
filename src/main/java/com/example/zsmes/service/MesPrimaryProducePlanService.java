@@ -5,6 +5,7 @@ import com.example.zsmes.entity.MesPrimaryProducePlan;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.zsmes.vo.PlanCondition;
 import com.example.zsmes.vo.PlanDataVo;
+import com.example.zsmes.vo.ProductingPlanVO;
 
 import java.util.List;
 
@@ -29,4 +30,8 @@ public interface MesPrimaryProducePlanService extends IService<MesPrimaryProduce
     PlanDataVo getPlanData();
 
     String deleteBySelectIds(List<String> deleteIds);
+
+    ProductingPlanVO getProductPlan();
+
+    String startPlanById(Long id);
 }

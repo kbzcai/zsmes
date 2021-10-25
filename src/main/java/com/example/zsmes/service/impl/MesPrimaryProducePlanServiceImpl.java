@@ -8,8 +8,10 @@ import com.example.zsmes.entity.MesPrimaryProducePlan;
 import com.example.zsmes.mapper.MesPrimaryProducePlanMapper;
 import com.example.zsmes.service.MesPrimaryProducePlanService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.zsmes.utils.GetUUID;
 import com.example.zsmes.vo.PlanCondition;
 import com.example.zsmes.vo.PlanDataVo;
+import com.example.zsmes.vo.ProductingPlanVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
@@ -62,6 +64,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
         if (list.size() > 0) {
             return "添加失败，存在改计划";
         } else {
+            mesPrimaryProducePlan.setId(GetUUID.getUUID());
             mesPrimaryProducePlan.setActualNum(0);
             mesPrimaryProducePlan.setFailNum(0);
             mesPrimaryProducePlan.setPassNum(0);
@@ -76,7 +79,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
         MesPrimaryProducePlan mesPrimaryProducePlan = mesPrimaryProducePlanMapper.selectById(id);
         mesPrimaryProducePlan.setActualNum(mesPrimaryProducePlan.getPlanNum() - mesPrimaryProducePlan.getFailNum());
         mesPrimaryProducePlan.setPlanStatus("1");
-        mesPrimaryProducePlan.setStatus("1");
+        mesPrimaryProducePlan.setStatus("0");
         mesPrimaryProducePlanMapper.updateById(mesPrimaryProducePlan);
         return "补充成功";
     }
@@ -97,10 +100,8 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
             if (mesPrimaryProducePlan.getActualNum() + mesPrimaryProducePlan.getFailNum() ==
                     mesPrimaryProducePlan.getPlanNum()) {
                 plan.setPlanStatus("1");
-                plan.setStatus("1");
             } else {
                 plan.setPlanStatus("0");
-                plan.setStatus("0");
             }
             plan.setPlanDate(mesPrimaryProducePlan.getPlanDate());
             plan.setPlanSchedule(mesPrimaryProducePlan.getPlanSchedule());
@@ -152,6 +153,34 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
             return "删除成功";
         } else {
             return "删除失败";
+        }
+    }
+
+    @Override
+    public ProductingPlanVO getProductPlan() {
+        ProductingPlanVO productingPlanVO = new ProductingPlanVO();
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("status", "1");
+        List<MesPrimaryProducePlan> list = mesPrimaryProducePlanMapper.selectList(wrapper);
+        if (list.size() == 1) {
+            MesPrimaryProducePlan plan = list.get(0);
+            productingPlanVO.setMesPrimaryProducePlan(plan);
+            productingPlanVO.setMes("查询成功");
+        } else {
+            productingPlanVO.setMes("没有正在生产的计划");
+        }
+        return productingPlanVO;
+    }
+
+    @Override
+    public String startPlanById(Long id) {
+        MesPrimaryProducePlan plan = mesPrimaryProducePlanMapper.selectById(id);
+        if(plan.getPlanStatus().equals("0")&&plan.getStatus().equals("0")){
+            plan.setStatus("1");
+            mesPrimaryProducePlanMapper.updateById(plan);
+            return "开始生产";
+        }else {
+            return "状态已经是正在生产！";
         }
     }
 }

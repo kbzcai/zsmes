@@ -50,6 +50,16 @@ public class MesPrimaryProducePlanController {
         return mesPrimaryProducePlanService.autoFillPlanById(id);
     }
 
+    @GetMapping("/getProductPlan")
+    public ProductingPlanVO getProductPlan(){
+        return mesPrimaryProducePlanService.getProductPlan();
+    }
+
+    @GetMapping("/startPlanById/{id}")
+    public String startPlanById(@PathVariable("id") Long id){
+        return mesPrimaryProducePlanService.startPlanById(id);
+    }
+
     @PutMapping("/updatePlan")
     public String updatePlan(@RequestBody MesPrimaryProducePlan mesPrimaryProducePlan){
         System.out.println("-----------------------------------");

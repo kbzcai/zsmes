@@ -175,11 +175,11 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
     @Override
     public String startPlanById(Long id) {
         MesPrimaryProducePlan plan = mesPrimaryProducePlanMapper.selectById(id);
-        if(plan.getPlanStatus().equals("0")&&plan.getStatus().equals("0")){
+        if (plan.getPlanStatus().equals("0") && plan.getStatus().equals("0")) {
             plan.setStatus("1");
             mesPrimaryProducePlanMapper.updateById(plan);
             return "开始生产";
-        }else {
+        } else {
             return "状态已经是正在生产！";
         }
     }

@@ -4,6 +4,7 @@ import com.example.zsmes.entity.MesPlc;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.zsmes.vo.PlcDataNumVo;
 import com.example.zsmes.vo.PlcDataVo;
+import com.example.zsmes.vo.PlcStateVO;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface MesPlcService extends IService<MesPlc> {
     List<PlcDataNumVo> getNum();
 
     PlcDataVo queryByNum(Integer num);
+
+    List<PlcStateVO> getState();
 }

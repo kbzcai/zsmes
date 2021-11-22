@@ -4,6 +4,7 @@ package com.example.zsmes.controller;
 import com.example.zsmes.service.MesPlcService;
 import com.example.zsmes.vo.PlcDataNumVo;
 import com.example.zsmes.vo.PlcDataVo;
+import com.example.zsmes.vo.PlcStateVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,6 +50,13 @@ public class MesPlcController {
         List<PlcDataNumVo> plcDataNumVoList = mesPlcService.getNum();
         System.out.println(plcDataNumVoList);
         return plcDataNumVoList;
+    }
+
+    @RequestMapping("/getStates")
+    public List<PlcStateVO> getStates() {
+        List<PlcStateVO> plcStateVOList = mesPlcService.getState();
+        System.out.println(plcStateVOList);
+        return plcStateVOList;
     }
 }
 

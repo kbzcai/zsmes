@@ -7,6 +7,7 @@ import com.example.zsmes.service.MesPlcService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.zsmes.vo.PlcDataNumVo;
 import com.example.zsmes.vo.PlcDataVo;
+import com.example.zsmes.vo.PlcStateVO;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -399,5 +400,27 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         }
         return plcDataVo;
 
+    }
+
+    @Override
+    public List<PlcStateVO> getState() {
+        List<PlcStateVO> list = new ArrayList<>();
+
+        QueryWrapper wrapper = new QueryWrapper();
+        MesPlc plc1 = mesPlcMapper.getNumData(wrapper);
+        System.out.println();
+        MesPlcR2 plc2 = mesPlcR2Mapper.getNumData(wrapper);
+        MesPlcR3 plc3 = mesPlcR3Mapper.getNumData(wrapper);
+        MesPlcR4 plc4 = mesPlcR4Mapper.getNumData(wrapper);
+        MesPlcR5 plc5 = mesPlcR5Mapper.getNumData(wrapper);
+        MesPlcR6 plc6 = mesPlcR6Mapper.getNumData(wrapper);
+        MesPlcR7 plc7 = mesPlcR7Mapper.getNumData(wrapper);
+        MesPlcR8 plc8 = mesPlcR8Mapper.getNumData(wrapper);
+        MesPlcR9 plc9 = mesPlcR9Mapper.getNumData(wrapper);
+        MesPlcR10 plc10 = mesPlcR10Mapper.getNumData(wrapper);
+        if (plc1.getR1EquipmentStatus() == "") {
+            list.add(new PlcStateVO("1", "0"));
+        }
+        return list;
     }
 }

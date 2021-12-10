@@ -277,6 +277,7 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         List<String> plcElectricList = new ArrayList<>();
         List<String> plcVoltageList = new ArrayList<>();
         List<LocalDateTime> timeList = new ArrayList<>();
+
         if (num.equals(1)) {
             plcDataVo.setPlcName("plc1");
             List<MesPlc> data = mesPlcMapper.getLastestData(wrapper);
@@ -408,7 +409,6 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
 
         QueryWrapper wrapper = new QueryWrapper();
         MesPlc plc1 = mesPlcMapper.getNumData(wrapper);
-        System.out.println();
         MesPlcR2 plc2 = mesPlcR2Mapper.getNumData(wrapper);
         MesPlcR3 plc3 = mesPlcR3Mapper.getNumData(wrapper);
         MesPlcR4 plc4 = mesPlcR4Mapper.getNumData(wrapper);
@@ -419,6 +419,24 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         MesPlcR9 plc9 = mesPlcR9Mapper.getNumData(wrapper);
         MesPlcR10 plc10 = mesPlcR10Mapper.getNumData(wrapper);
         if (plc1.getR1EquipmentStatus() == "") {
+            list.add(new PlcStateVO("1", "0"));
+        } else if (plc2.getR1EquipmentStatus() == "") {
+            list.add(new PlcStateVO("1", "0"));
+        } else if (plc3.getR1EquipmentStatus() == "") {
+            list.add(new PlcStateVO("1", "0"));
+        } else if (plc4.getR1EquipmentStatus() == "") {
+            list.add(new PlcStateVO("1", "0"));
+        } else if (plc5.getR1EquipmentStatus() == "") {
+            list.add(new PlcStateVO("1", "0"));
+        } else if (plc6.getR1EquipmentStatus() == "") {
+            list.add(new PlcStateVO("1", "0"));
+        } else if (plc7.getR1EquipmentStatus() == "") {
+            list.add(new PlcStateVO("1", "0"));
+        } else if (plc8.getR1EquipmentStatus() == "") {
+            list.add(new PlcStateVO("1", "0"));
+        } else if (plc9.getR1EquipmentStatus() == "") {
+            list.add(new PlcStateVO("1", "0"));
+        } else if (plc10.getR1EquipmentStatus() == "") {
             list.add(new PlcStateVO("1", "0"));
         }
         return list;

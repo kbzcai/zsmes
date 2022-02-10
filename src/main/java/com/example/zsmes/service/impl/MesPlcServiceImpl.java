@@ -237,7 +237,6 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         list.add(plcDataVo8);
         list.add(plcDataVo9);
         list.add(plcDataVo10);
-
         return list;
     }
 
@@ -257,6 +256,7 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         MesPlcR8 plc8 = mesPlcR8Mapper.getNumData(wrapper);
         MesPlcR9 plc9 = mesPlcR9Mapper.getNumData(wrapper);
         MesPlcR10 plc10 = mesPlcR10Mapper.getNumData(wrapper);
+
         list.add(new PlcDataNumVo(plc1.getProdNum(), plc1.getProdNumb()));
         list.add(new PlcDataNumVo(plc2.getProdNum(), plc2.getProdNumb()));
         list.add(new PlcDataNumVo(plc3.getProdNum(), plc3.getProdNumb()));
@@ -311,6 +311,7 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
                 plcVoltageList.add(plcData.getR1Voltage());
                 timeList.add(plcData.getCreateTime());
             }
+
             plcDataVo.setPlcElectric(plcElectricList);
             plcDataVo.setPlcVoltage(plcVoltageList);
             plcDataVo.setTime(timeList);
@@ -400,7 +401,6 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
             plcDataVo.setTime(timeList);
         }
         return plcDataVo;
-
     }
 
     @Override
@@ -416,29 +416,19 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         MesPlcR6 plc6 = mesPlcR6Mapper.getNumData(wrapper);
         MesPlcR7 plc7 = mesPlcR7Mapper.getNumData(wrapper);
         MesPlcR8 plc8 = mesPlcR8Mapper.getNumData(wrapper);
-        MesPlcR9 plc9 = mesPlcR9Mapper.getNumData(wrapper);
+        MesPlcR9 plc9 = mesPlcR9Mapper. getNumData(wrapper);
         MesPlcR10 plc10 = mesPlcR10Mapper.getNumData(wrapper);
-        if (plc1.getR1EquipmentStatus() == "") {
-            list.add(new PlcStateVO("1", "0"));
-        } else if (plc2.getR1EquipmentStatus() == "") {
-            list.add(new PlcStateVO("1", "0"));
-        } else if (plc3.getR1EquipmentStatus() == "") {
-            list.add(new PlcStateVO("1", "0"));
-        } else if (plc4.getR1EquipmentStatus() == "") {
-            list.add(new PlcStateVO("1", "0"));
-        } else if (plc5.getR1EquipmentStatus() == "") {
-            list.add(new PlcStateVO("1", "0"));
-        } else if (plc6.getR1EquipmentStatus() == "") {
-            list.add(new PlcStateVO("1", "0"));
-        } else if (plc7.getR1EquipmentStatus() == "") {
-            list.add(new PlcStateVO("1", "0"));
-        } else if (plc8.getR1EquipmentStatus() == "") {
-            list.add(new PlcStateVO("1", "0"));
-        } else if (plc9.getR1EquipmentStatus() == "") {
-            list.add(new PlcStateVO("1", "0"));
-        } else if (plc10.getR1EquipmentStatus() == "") {
-            list.add(new PlcStateVO("1", "0"));
-        }
+
+        list.add(new PlcStateVO(plc1.getR1EquipmentStatus(),plc1.getR1EquipmentStatus()));
+        list.add(new PlcStateVO(plc2.getR1EquipmentStatus(),plc2.getR1EquipmentStatus()));
+        list.add(new PlcStateVO(plc3.getR1EquipmentStatus(),plc3.getR1EquipmentStatus()));
+        list.add(new PlcStateVO(plc4.getR1EquipmentStatus(),plc4.getR1EquipmentStatus()));
+        list.add(new PlcStateVO(plc5.getR1EquipmentStatus(),plc5.getR1EquipmentStatus()));
+        list.add(new PlcStateVO(plc6.getR1EquipmentStatus(),plc6.getR1EquipmentStatus()));
+        list.add(new PlcStateVO(plc7.getR1EquipmentStatus(),plc7.getR1EquipmentStatus()));
+        list.add(new PlcStateVO(plc8.getR1EquipmentStatus(),plc8.getR1EquipmentStatus()));
+        list.add(new PlcStateVO(plc9.getR1EquipmentStatus(),plc9.getR1EquipmentStatus()));
+        list.add(new PlcStateVO(plc10.getR1EquipmentStatus(),plc10.getR1EquipmentStatus()));
         return list;
     }
 }

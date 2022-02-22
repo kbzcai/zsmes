@@ -21,4 +21,6 @@ public interface MesEquipmentFaultHistoryService extends IService<MesEquipmentFa
     IPage<MesEquipmentFaultHistory> queryByList(int page, int limit, FaultHistoryCondition faultHistoryCondition);
 
     String deleteBySelectIds(List<String> deleteIds);
+
+    List<String> queryAllEquipmentNo();
 }

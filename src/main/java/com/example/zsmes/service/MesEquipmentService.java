@@ -24,4 +24,6 @@ public interface MesEquipmentService extends IService<MesEquipment> {
     String deleteBySelectIds(List<String> deleteIds);
 
     IPage<MesEquipment> queryByList(int page, int limit, EquipmentCondition equipmentCondition);
+
+    List<String> queryAllEquipmentNo();
 }

@@ -34,4 +34,6 @@ public interface MesPrimaryProducePlanService extends IService<MesPrimaryProduce
     ProductingPlanVO getProductPlan();
 
     String startPlanById(Long id);
+
+    List<String> queryAllPlanNo();
 }

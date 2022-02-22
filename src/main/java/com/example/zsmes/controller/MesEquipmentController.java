@@ -40,6 +40,11 @@ public class MesEquipmentController {
         return equipmentVO;
     }
 
+    @GetMapping("/queryAllEquipmentNo")
+    public List<String> queryAllEquipmentNo() {
+        return mesEquipmentService.queryAllEquipmentNo();
+    }
+
     @PostMapping("/addEquipment")
     public String addEquipment(@RequestBody MesEquipment mesEquipment){
         return mesEquipmentService.addMesEquipment(mesEquipment);

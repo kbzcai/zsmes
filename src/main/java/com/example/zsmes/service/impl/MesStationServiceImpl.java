@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -91,5 +92,13 @@ public class MesStationServiceImpl extends ServiceImpl<MesStationMapper, MesStat
     @Override
     public List<MesStation> queryAllStation() {
         return mesStationMapper.selectList(null);
+    }
+
+    @Override
+    public List<String> queryAllStationName() {
+        List<MesStation> items = mesStationMapper.selectList(null);
+        List<String> stationNameList = items.stream().map(MesStation::getStationName).collect(Collectors.toList());// 取出其中一列
+        System.out.println(stationNameList);
+        return stationNameList;
     }
 }

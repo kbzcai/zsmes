@@ -20,6 +20,7 @@ import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -154,5 +155,21 @@ public class MesBomServiceImpl extends ServiceImpl<MesBomMapper, MesBom> impleme
             return "导入成功";
         }
 
+    }
+
+    @Override
+    public List<String> queryAllProductNo() {
+        List<MesProduct> items = mesProductMapper.selectList(null);
+        List<String> productNoList = items.stream().map(MesProduct::getProductNo).collect(Collectors.toList());// 取出其中一列
+        System.out.println(productNoList);
+        return productNoList;
+    }
+
+    @Override
+    public List<String> queryAllMaterialNo() {
+        List<MesBom> items = mesBomMapper.selectList(null);
+        List<String> materialNoList = items.stream().map(MesBom::getMaterialNo).collect(Collectors.toList());// 取出其中一列
+        System.out.println(materialNoList);
+        return materialNoList;
     }
 }

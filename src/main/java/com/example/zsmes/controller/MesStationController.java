@@ -26,6 +26,11 @@ public class MesStationController {
     @Autowired
     private MesStationService mesStationService;
 
+    @GetMapping("/queryAllStationName")
+    public List<String> queryAllStationName() {
+        return mesStationService.queryAllStationName();
+    }
+
     @PostMapping("/addStation")
     public String addStation(@RequestBody MesStation mesStation) {
         return mesStationService.addStation(mesStation);

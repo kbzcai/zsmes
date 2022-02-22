@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.zsmes.entity.MesEquipment;
 import com.example.zsmes.entity.MesPrimaryProducePlan;
+import com.example.zsmes.entity.MesProduct;
 import com.example.zsmes.mapper.MesPrimaryProducePlanMapper;
 import com.example.zsmes.service.MesPrimaryProducePlanService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -182,5 +184,13 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
         } else {
             return "状态已经是正在生产！";
         }
+    }
+
+    @Override
+    public List<String> queryAllPlanNo() {
+        List<MesPrimaryProducePlan> items = mesPrimaryProducePlanMapper.selectList(null);
+        List<String> planNoList = items.stream().map(MesPrimaryProducePlan::getPlanNo).collect(Collectors.toList());// 取出其中一列
+        System.out.println(planNoList);
+        return planNoList;
     }
 }

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.zsmes.entity.MesEquipment;
 import com.example.zsmes.entity.MesEquipmentFaultHistory;
 import com.example.zsmes.entity.MesEquipmentRepairHistory;
+import com.example.zsmes.entity.MesPrimaryProducePlan;
 import com.example.zsmes.mapper.MesEquipmentFaultHistoryMapper;
 import com.example.zsmes.mapper.MesEquipmentMapper;
 import com.example.zsmes.mapper.MesEquipmentRepairHistoryMapper;
@@ -19,6 +20,7 @@ import org.thymeleaf.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -111,5 +113,13 @@ public class MesEquipmentServiceImpl extends ServiceImpl<MesEquipmentMapper, Mes
         }
         IPage<MesEquipment> mesEquipmentIPage = mesEquipmentMapper.selectPage(page, wrapper);
         return mesEquipmentIPage;
+    }
+
+    @Override
+    public List<String> queryAllEquipmentNo() {
+        List<MesEquipment> items = mesEquipmentMapper.selectList(null);
+        List<String> equipmentNoList = items.stream().map(MesEquipment::getEquipmentNo).collect(Collectors.toList());// 取出其中一列
+        System.out.println(equipmentNoList);
+        return equipmentNoList;
     }
 }

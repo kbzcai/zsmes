@@ -29,4 +29,8 @@ public interface MesBomService extends IService<MesBom> {
     MesBom queryByMaterialNo(String materialNo);
 
     String importBom(List<Map<String, Object>> excelInfo);
+
+    List<String> queryAllProductNo();
+
+    List<String> queryAllMaterialNo();
 }

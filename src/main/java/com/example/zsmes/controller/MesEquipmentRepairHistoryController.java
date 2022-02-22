@@ -35,6 +35,11 @@ public class MesEquipmentRepairHistoryController {
         return mesEquipmentRepairHistoryService.addRepairHistory(mesEquipmentRepairHistory);
     }
 
+    @GetMapping("/queryAllEquipmentNo")
+    public List<String> queryAllEquipmentNo() {
+        return mesEquipmentRepairHistoryService.queryAllEquipmentNo();
+    }
+
     @PostMapping("/queryByList/{page}/{limit}")
     public RepairHistoryVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false)RepairHistoryCondition repairHistoryCondition){
         IPage<MesEquipmentRepairHistory> repairHistoryIPage = mesEquipmentRepairHistoryService.queryByList(page, limit,repairHistoryCondition);

@@ -55,6 +55,11 @@ public class MesPrimaryProducePlanController {
         return mesPrimaryProducePlanService.getProductPlan();
     }
 
+    @GetMapping("/queryAllPlanNo")
+    public List<String> queryAllPlanNo() {
+        return mesPrimaryProducePlanService.queryAllPlanNo();
+    }
+
     @GetMapping("/startPlanById/{id}")
     public String startPlanById(@PathVariable("id") Long id){
         return mesPrimaryProducePlanService.startPlanById(id);

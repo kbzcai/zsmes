@@ -33,6 +33,11 @@ public class MesEquipmentFaultHistoryController {
         return mesEquipmentFaultHistoryService.addFaultHistoryService(mesEquipmentFaultHistory);
     }
 
+    @GetMapping("/queryAllEquipmentNo")
+    public List<String> queryAllEquipmentNo() {
+        return mesEquipmentFaultHistoryService.queryAllEquipmentNo();
+    }
+
     @PostMapping("/queryByList/{page}/{limit}")
     public FaultHistoryVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false)FaultHistoryCondition faultHistoryCondition){
         IPage<MesEquipmentFaultHistory> faultHistoryIPage = mesEquipmentFaultHistoryService.queryByList(page, limit,faultHistoryCondition);

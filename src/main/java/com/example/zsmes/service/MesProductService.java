@@ -48,4 +48,6 @@ public interface MesProductService extends IService<MesProduct> {
     String deleteBySelectIds(List<String> deleteIds);
 
     List<MesProduct> queryAllProduct();
+
+    List<String> queryAllProductNo();
 }

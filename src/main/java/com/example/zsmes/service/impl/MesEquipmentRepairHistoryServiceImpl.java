@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.zsmes.entity.MesEquipment;
+import com.example.zsmes.entity.MesEquipmentFaultHistory;
 import com.example.zsmes.entity.MesEquipmentRepairHistory;
 import com.example.zsmes.mapper.MesEquipmentMapper;
 import com.example.zsmes.mapper.MesEquipmentRepairHistoryMapper;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -81,5 +83,13 @@ public class MesEquipmentRepairHistoryServiceImpl extends ServiceImpl<MesEquipme
         } else {
             return "删除失败";
         }
+    }
+
+    @Override
+    public List<String> queryAllEquipmentNo() {
+        List<MesEquipment> items = mesEquipmentMapper.selectList(null);
+        List<String> equipmentNoList = items.stream().map(MesEquipment::getEquipmentNo).collect(Collectors.toList());// 取出其中一列
+        System.out.println(equipmentNoList);
+        return equipmentNoList;
     }
 }

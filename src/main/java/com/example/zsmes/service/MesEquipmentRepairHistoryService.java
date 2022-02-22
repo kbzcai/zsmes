@@ -21,4 +21,6 @@ public interface MesEquipmentRepairHistoryService extends IService<MesEquipmentR
     IPage<MesEquipmentRepairHistory> queryByList(int page, int limit, RepairHistoryCondition repairHistoryCondition);
 
     String deleteBySelectIds(List<String> deleteIds);
+
+    List<String> queryAllEquipmentNo();
 }

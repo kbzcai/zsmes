@@ -243,7 +243,6 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
     @Override
     public List<PlcDataNumVo> getNum() {
         List<PlcDataNumVo> list = new ArrayList<>();
-
         QueryWrapper wrapper = new QueryWrapper();
         MesPlc plc1 = mesPlcMapper.getNumData(wrapper);
         System.out.println();

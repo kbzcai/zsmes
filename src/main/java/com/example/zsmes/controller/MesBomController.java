@@ -1,6 +1,5 @@
 package com.example.zsmes.controller;
 
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.zsmes.entity.MesBom;
 import com.example.zsmes.service.MesBomService;
@@ -37,9 +36,19 @@ public class MesBomController {
         return mesBomService.queryByProductNo(productNo);
     }
 
+    @GetMapping("/queryAllProductNo")
+    public List<String> queryAllProductNo() {
+        return mesBomService.queryAllProductNo();
+    }
+
     @GetMapping("/queryByMaterialNo/{materialNo}")
     public MesBom queryByMaterialNo(@PathVariable("materialNo") String materialNo) {
         return mesBomService.queryByMaterialNo(materialNo);
+    }
+
+    @GetMapping("/queryAllMaterialNo")
+    public List<String> queryAllMaterialNo() {
+        return mesBomService.queryAllMaterialNo();
     }
 
     @PostMapping("/queryByList/{page}/{limit}")

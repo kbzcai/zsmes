@@ -3,6 +3,7 @@ package com.example.zsmes.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.zsmes.entity.MesBom;
 import com.example.zsmes.entity.MesPrimaryProducePlan;
 import com.example.zsmes.entity.MesProduct;
 import com.example.zsmes.entity.MesProductLine;
@@ -21,6 +22,7 @@ import org.thymeleaf.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -203,6 +205,14 @@ public class MesProductServiceImpl extends ServiceImpl<MesProductMapper, MesProd
     @Override
     public List<MesProduct> queryAllProduct() {
         return mesProductMapper.selectList(null);
+    }
+
+    @Override
+    public List<String> queryAllProductNo() {
+        List<MesProduct> items = mesProductMapper.selectList(null);
+        List<String> productNoList = items.stream().map(MesProduct::getProductNo).collect(Collectors.toList());// 取出其中一列
+        System.out.println(productNoList);
+        return productNoList;
     }
 
 

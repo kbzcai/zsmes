@@ -56,6 +56,11 @@ public class MesProductController {
         return productVO;
     }
 
+    @GetMapping("/queryAllProductNo")
+    public List<String> queryAllProductNo() {
+        return mesProductService.queryAllProductNo();
+    }
+
     @DeleteMapping("/deleteBySelectIds/{deleteIds}")
     public String deleteBySelectIds(@PathVariable("deleteIds") List<String> deleteIds){
         return mesProductService.deleteBySelectIds(deleteIds);

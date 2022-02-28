@@ -49,6 +49,7 @@ public class MesEquipmentServiceImpl extends ServiceImpl<MesEquipmentMapper, Mes
         List<MesEquipment> list = mesEquipmentMapper.selectList(wrapper);
         if (list.size() > 0) {
             MesEquipment equipment = list.get(0);
+            equipment.setStationNo(mesEquipment.getStationNo());
             equipment.setEquipmentName(mesEquipment.getEquipmentName());
             equipment.setEquipmentStatus(mesEquipment.getEquipmentStatus());
             equipment.setEquipmentNo(mesEquipment.getEquipmentNo());

@@ -4,21 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.zsmes.entity.MesEquipment;
-import com.example.zsmes.entity.MesEquipmentFaultHistory;
-import com.example.zsmes.entity.MesEquipmentRepairHistory;
-import com.example.zsmes.entity.MesPrimaryProducePlan;
 import com.example.zsmes.mapper.MesEquipmentFaultHistoryMapper;
 import com.example.zsmes.mapper.MesEquipmentMapper;
 import com.example.zsmes.mapper.MesEquipmentRepairHistoryMapper;
 import com.example.zsmes.service.MesEquipmentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.zsmes.vo.EquipmentCondition;
-import com.example.zsmes.vo.EquipmentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,11 +74,11 @@ public class MesEquipmentServiceImpl extends ServiceImpl<MesEquipmentMapper, Mes
     public String deleteBySelectIds(List<String> deleteIds) {
         List<MesEquipment> mesEquipments = mesEquipmentMapper.selectBatchIds(deleteIds);
         System.out.println(mesEquipments);
-        for (MesEquipment mesEquipment:mesEquipments
-             ) {
-            QueryWrapper wrapper=new QueryWrapper();
-            String equipmentNo=mesEquipment.getEquipmentNo();
-            wrapper.eq("equipment_no",equipmentNo);
+        for (MesEquipment mesEquipment : mesEquipments
+        ) {
+            QueryWrapper wrapper = new QueryWrapper();
+            String equipmentNo = mesEquipment.getEquipmentNo();
+            wrapper.eq("equipment_no", equipmentNo);
             mesEquipmentFaultHistoryMapper.delete(wrapper);
             mesEquipmentRepairHistoryMapper.delete(wrapper);
         }
@@ -99,7 +94,7 @@ public class MesEquipmentServiceImpl extends ServiceImpl<MesEquipmentMapper, Mes
     @Override
     public IPage<MesEquipment> queryByList(int currentpage, int limit, EquipmentCondition equipmentCondition) {
         Page<MesEquipment> page = new Page<>(currentpage, limit);
-        QueryWrapper wrapper=new QueryWrapper();
+        QueryWrapper wrapper = new QueryWrapper();
         String equipmentNo = equipmentCondition.getEquipmentNo();
         String beginTime = equipmentCondition.getBeginTime();
         String endTime = equipmentCondition.getEndTime();

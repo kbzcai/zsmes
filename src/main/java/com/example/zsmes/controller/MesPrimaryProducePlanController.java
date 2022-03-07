@@ -2,6 +2,7 @@ package com.example.zsmes.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.example.zsmes.entity.MesBom;
 import com.example.zsmes.entity.MesEquipment;
 import com.example.zsmes.entity.MesPrimaryProducePlan;
 import com.example.zsmes.service.MesPrimaryProducePlanService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -55,14 +57,26 @@ public class MesPrimaryProducePlanController {
         return mesPrimaryProducePlanService.getProductPlan();
     }
 
+    @GetMapping("/getUnFinishPlan")
+    public List<MesPrimaryProducePlan> getUnFinishPlan(){
+        return mesPrimaryProducePlanService.getUnFinishPlan();
+    }
+
     @GetMapping("/queryAllPlanNo")
     public List<String> queryAllPlanNo() {
         return mesPrimaryProducePlanService.queryAllPlanNo();
     }
 
-    @GetMapping("/startPlanById/{id}")
-    public String startPlanById(@PathVariable("id") Long id){
-        return mesPrimaryProducePlanService.startPlanById(id);
+    @PostMapping("/startPlanByNo")
+    public String startPlanByNo(@RequestBody Map<String,Object> map){
+        System.out.println(map);
+        return mesPrimaryProducePlanService.startPlanByNo(map.get("now").toString(),map.get("before").toString());
+    }
+
+    @PostMapping("/pass")
+    public String pass(@RequestBody Map<String,Object> map){
+        System.out.println(map);
+        return mesPrimaryProducePlanService.pass(map.get("before").toString(),(Integer)map.get("enum"));
     }
 
     @PutMapping("/updatePlan")

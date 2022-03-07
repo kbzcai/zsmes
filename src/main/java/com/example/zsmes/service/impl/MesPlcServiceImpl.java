@@ -223,6 +223,59 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
             plcVoltageList10.add(mesplc.getR1Voltage());
             plctimeList10.add(mesplc.getCreateTime());
         }
+        /*
+        集团愿景：成为全国最大的焊接专业化服务公司
+        集团理念：共同合作，一起成长，一起腾飞
+        集团使命：为市场寻找好产品，为好产品成就市场
+        集团精神：忠诚 实干 勤奋 进取
+        集团核心价值观 诚信 共赢 创新 精进
+//        相互服务 相互配合 相互制约的原则
+//        以企业利益为最高利益的原则
+//        下级服从上级的原则
+//        最高职位负责制的原则
+//        全员营销的原则
+//        4小时复命制的原则
+//        老员工带新员工的原则
+//        内部竞争上岗的原则
+        孵化 经营 管理
+        数字思维 结果思维 内向思维
+//        地级
+        愿力 行动力 学习力 耐力 能力
+        初创期 发展期 成熟期 衰退期 成熟期 衰退期
+        同向而行 共创共享 彼此为伴 共生共存
+        总裁的责任 管理的需求 员工的需求
+        创业 心理 经济 身体
+        坚定者 奋进者 搏击者
+        金属 金属
+        焊接机器人 焊接工作站 智能制造
+//        1993 焊接材料 焊接设备 焊接辅机具 应用服务 焊接专业化服务公司
+        创建期 探索期 发展期 腾飞阶段
+        微笑多一点，嘴巴甜一点
+        脾气小一点，度量大一点
+        行动快一点，效率高一点
+        做事多一点，理由少一点
+        业务精一点，脑筋活一点
+        1、原子是最小的物质单位，代表我们公司的每一个人
+        2、原子和原子结合是牢固的，代表我们和客户供应商是密不可分的
+        3、是为市场寻找好产品，为好产品成就市场的媒介
+        1、专业的优势：公司已成立30年，内部已经有很多专家和高技术人才
+        2、成熟的管理：30年来公司已经形成了一套完善的管理制度
+        3、导师团的帮扶：创业的新公司集团会启动孵化政策 有一对一的指导老师进行经营和管理的帮扶。
+        1、愿力：有企图心，事业心
+        2、耐力：能承受成长过程中的压力，做事持之以恒
+        3、学习力：持续学习，精益求精
+        4、行动力：说一千遍不如行动一次
+        5、能力：专业，知识，经验，技能
+        1、沟通表达的能力
+        2、协调指挥的能力
+        3、决策判断的能力
+        4、识人用人的能力
+        5、传帮带的能力
+        6、培养激励团队的能力
+        1、数字思维：以数字数据为根据进行管理
+        2、结果思维：以结果为准，同样的工作看时间，同样的数量看质量
+        3、内向思维：凡事先找自己的原因，反省自己
+        * */
         plcDataVo10.setPlcElectric(plcElectricList10);
         plcDataVo10.setPlcVoltage(plcVoltageList10);
         plcDataVo10.setTime(plctimeList10);
@@ -245,7 +298,6 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         List<PlcDataNumVo> list = new ArrayList<>();
         QueryWrapper wrapper = new QueryWrapper();
         MesPlc plc1 = mesPlcMapper.getNumData(wrapper);
-        System.out.println();
         MesPlcR2 plc2 = mesPlcR2Mapper.getNumData(wrapper);
         MesPlcR3 plc3 = mesPlcR3Mapper.getNumData(wrapper);
         MesPlcR4 plc4 = mesPlcR4Mapper.getNumData(wrapper);

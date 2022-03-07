@@ -10,4 +10,5 @@ public class PlanDataVo {
     private List<Integer> actualNumList;
     private List<Integer> planNumList;
     private List<Integer> failNumList;
+    private List<Integer> weldingFinishNumList;
 }

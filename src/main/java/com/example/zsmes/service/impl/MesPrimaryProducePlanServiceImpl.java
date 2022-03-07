@@ -79,7 +79,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
     @Override
     public String autoFillPlanById(Long id) {
         MesPrimaryProducePlan mesPrimaryProducePlan = mesPrimaryProducePlanMapper.selectById(id);
-        mesPrimaryProducePlan.setActualNum(mesPrimaryProducePlan.getPlanNum() - mesPrimaryProducePlan.getFailNum());
+        mesPrimaryProducePlan.setActualNum(mesPrimaryProducePlan.getPlanNum() - mesPrimaryProducePlan.getFailNum() - mesPrimaryProducePlan.getWeldingFinishNum());
         mesPrimaryProducePlan.setPlanStatus("1");
         mesPrimaryProducePlan.setStatus("0");
         mesPrimaryProducePlanMapper.updateById(mesPrimaryProducePlan);
@@ -94,12 +94,14 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
         MesPrimaryProducePlan plan = list.get(0);
         if (mesPrimaryProducePlan.getActualNum() <= mesPrimaryProducePlan.getPlanNum() &&
                 mesPrimaryProducePlan.getFailNum() <= mesPrimaryProducePlan.getPlanNum() &&
-                mesPrimaryProducePlan.getActualNum() + mesPrimaryProducePlan.getFailNum() <=
+                mesPrimaryProducePlan.getWeldingFinishNum() <= mesPrimaryProducePlan.getPlanNum() &&
+                mesPrimaryProducePlan.getActualNum() + mesPrimaryProducePlan.getFailNum() + mesPrimaryProducePlan.getWeldingFinishNum() <=
                         mesPrimaryProducePlan.getPlanNum()) {
             plan.setPlanNum(mesPrimaryProducePlan.getPlanNum());
             plan.setActualNum(mesPrimaryProducePlan.getActualNum());
+            plan.setWeldingFinishNum(mesPrimaryProducePlan.getWeldingFinishNum());
             plan.setFailNum(mesPrimaryProducePlan.getFailNum());
-            if (mesPrimaryProducePlan.getActualNum() + mesPrimaryProducePlan.getFailNum() ==
+            if (mesPrimaryProducePlan.getActualNum() + mesPrimaryProducePlan.getWeldingFinishNum() + mesPrimaryProducePlan.getFailNum() ==
                     mesPrimaryProducePlan.getPlanNum()) {
                 plan.setPlanStatus("1");
             } else {
@@ -120,6 +122,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
         List<Integer> actualNumList = new ArrayList<>();
         List<Integer> planNumList = new ArrayList<>();
         List<Integer> failNumList = new ArrayList<>();
+        List<Integer> planWeldingFinishNumList = new ArrayList<>();
         for (MesPrimaryProducePlan plan : mesPrimaryProducePlanMapper.queryDayList()
         ) {
             System.out.println(plan);
@@ -141,9 +144,13 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
         failNumList.add(mesPrimaryProducePlanMapper.queryFailNumDay());
         failNumList.add(mesPrimaryProducePlanMapper.queryFailNumWeek());
         failNumList.add(mesPrimaryProducePlanMapper.queryFailNumMonth());
+        planWeldingFinishNumList.add(mesPrimaryProducePlanMapper.queryWeldingFinishNumDay());
+        planWeldingFinishNumList.add(mesPrimaryProducePlanMapper.queryWeldingFinishNumWeek());
+        planWeldingFinishNumList.add(mesPrimaryProducePlanMapper.queryWeldingFinishNumMonth());
         planDataVo.setActualNumList(actualNumList);
         planDataVo.setPlanNumList(planNumList);
         planDataVo.setFailNumList(failNumList);
+        planDataVo.setWeldingFinishNumList(planWeldingFinishNumList);
         return planDataVo;
     }
 
@@ -175,12 +182,27 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
     }
 
     @Override
-    public String startPlanById(Long id) {
-        MesPrimaryProducePlan plan = mesPrimaryProducePlanMapper.selectById(id);
+    public String startPlanByNo(String now, String before) {
+        System.out.println(now);
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("plan_no", now);
+        MesPrimaryProducePlan plan = mesPrimaryProducePlanMapper.selectOne(wrapper);
+        System.out.println(plan.getPlanStatus());
+        System.out.println(plan.getStatus());
         if (plan.getPlanStatus().equals("0") && plan.getStatus().equals("0")) {
+            //status为1之前先把之前的status变成0
+            if (!StringUtils.isEmpty(before)) {
+                wrapper.clear();
+                wrapper.eq("plan_no", before);
+                MesPrimaryProducePlan beforePlan = mesPrimaryProducePlanMapper.selectOne(wrapper);
+                beforePlan.setStatus("0");
+                mesPrimaryProducePlanMapper.updateById(beforePlan);
+            }
+            //status为1
             plan.setStatus("1");
             mesPrimaryProducePlanMapper.updateById(plan);
             return "开始生产";
+            /////////form 传多个对象
         } else {
             return "状态已经是正在生产！";
         }
@@ -193,4 +215,40 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
         System.out.println(planNoList);
         return planNoList;
     }
+
+    @Override
+    public List<MesPrimaryProducePlan> getUnFinishPlan() {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("plan_status", "0");
+        List<MesPrimaryProducePlan> list = mesPrimaryProducePlanMapper.selectList(wrapper);
+        return list;
+    }
+
+    @Override
+    public String pass(String before, Integer index) {
+        QueryWrapper wrapper = new QueryWrapper();
+        System.out.println("--------------"+index);
+        wrapper.eq("plan_no", before);
+        MesPrimaryProducePlan plan = mesPrimaryProducePlanMapper.selectOne(wrapper);
+        if (plan.getActualNum() + plan.getWeldingFinishNum() + plan.getFailNum() < plan.getPlanNum()) {
+            if (index.equals(1)) {
+                plan.setActualNum(plan.getActualNum() + 1);
+            } else if (index.equals(2)) {
+                plan.setFailNum(plan.getFailNum() + 1);
+            } else {
+                plan.setWeldingFinishNum(plan.getWeldingFinishNum() + 1);
+            }
+            if (plan.getActualNum() + plan.getWeldingFinishNum() + plan.getFailNum() == plan.getPlanNum()) {
+                plan.setPlanStatus("1");
+                plan.setStatus("0");
+                mesPrimaryProducePlanMapper.updateById(plan);
+                return "完成";
+            }
+            mesPrimaryProducePlanMapper.updateById(plan);
+            return "合格";
+        } else {
+            return "系统出错，请重新检查数据库数据";
+        }
+    }
+
 }

@@ -32,6 +32,9 @@ public interface MesPrimaryProducePlanMapper extends BaseMapper<MesPrimaryProduc
     @Select("select sum(plan_num) from mes_primary_produce_plan ${ew.customSqlSegment}")
     Integer planCount(@Param(Constants.WRAPPER) Wrapper<MesPrimaryProducePlan> wrapper);
 
+    @Select("select sum(welding_finish_num) from mes_primary_produce_plan ${ew.customSqlSegment}")
+    Integer weldingFinishCount(@Param(Constants.WRAPPER) Wrapper<MesPrimaryProducePlan> wrapper);
+
 
     @Select("select * from mes_primary_produce_plan where to_days(plan_date) = to_days(now())")
     List<MesPrimaryProducePlan> queryDayList();
@@ -68,4 +71,13 @@ public interface MesPrimaryProducePlanMapper extends BaseMapper<MesPrimaryProduc
 
     @Select("select sum(fail_num) from mes_primary_produce_plan where date_format(plan_date,'%Y%m') = date_format(CURDATE(),'%Y%m')")
     Integer queryFailNumMonth();
+
+    @Select("select sum(welding_finish_num) from mes_primary_produce_plan where to_days(plan_date) = to_days(now())")
+    Integer queryWeldingFinishNumDay();
+
+    @Select("select sum(welding_finish_num) from mes_primary_produce_plan where YEARWEEK(date_format(plan_date,'%Y-%m-%d')) = YEARWEEK(now())")
+    Integer queryWeldingFinishNumWeek();
+
+    @Select("select sum(welding_finish_num) from mes_primary_produce_plan where date_format(plan_date,'%Y%m') = date_format(CURDATE(),'%Y%m')")
+    Integer queryWeldingFinishNumMonth();
 }

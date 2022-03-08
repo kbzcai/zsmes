@@ -59,6 +59,27 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
     }
 
     @Override
+    public IPage<MesPrimaryProducePlan> queryByListByFix(int currentpage, int limit, PlanCondition planCondition) {
+        Page<MesPrimaryProducePlan> page = new Page<>(currentpage, limit);
+        QueryWrapper wrapper = new QueryWrapper();
+        String planNo = planCondition.getPlanNo();
+        String beginTime = planCondition.getBeginTime();
+        String endTime = planCondition.getEndTime();
+        if (!StringUtils.isEmpty(planNo)) {
+            wrapper.like("plan_no", planNo);
+        }
+        if (!StringUtils.isEmpty(beginTime)) {
+            wrapper.ge("plan_date", beginTime);
+        }
+        if (!StringUtils.isEmpty(endTime)) {
+            wrapper.le("plan_date", endTime);
+        }
+        wrapper.gt("welding_finish_num",0);
+        IPage<MesPrimaryProducePlan> primaryProducePlanIPage = mesPrimaryProducePlanMapper.selectPage(page, wrapper);
+        return primaryProducePlanIPage;
+    }
+
+    @Override
     public String addPlan(MesPrimaryProducePlan mesPrimaryProducePlan) {
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.eq("plan_no", mesPrimaryProducePlan.getPlanNo());
@@ -84,6 +105,15 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
         mesPrimaryProducePlan.setStatus("0");
         mesPrimaryProducePlanMapper.updateById(mesPrimaryProducePlan);
         return "补充成功";
+    }
+
+    @Override
+    public String fixPlanById(Long id) {
+        MesPrimaryProducePlan mesPrimaryProducePlan = mesPrimaryProducePlanMapper.selectById(id);
+        mesPrimaryProducePlan.setActualNum(mesPrimaryProducePlan.getPlanNum()+ mesPrimaryProducePlan.getWeldingFinishNum());
+        mesPrimaryProducePlan.setWeldingFinishNum(0);
+        mesPrimaryProducePlanMapper.updateById(mesPrimaryProducePlan);
+        return "补焊成功";
     }
 
     @Override
@@ -250,5 +280,4 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
             return "系统出错，请重新检查数据库数据";
         }
     }
-
 }

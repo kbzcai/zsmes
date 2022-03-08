@@ -42,6 +42,18 @@ public class MesPrimaryProducePlanController {
         return planVO;
     }
 
+    @PostMapping("/queryByListByFix/{page}/{limit}")
+    public PlanVO queryByListByFix(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false) PlanCondition planCondition){
+        IPage<MesPrimaryProducePlan> primaryProducePlanIPage = mesPrimaryProducePlanService.queryByListByFix(page, limit,planCondition);
+        PlanVO planVO=new PlanVO();
+        planVO.setCurrent(page);
+        planVO.setData(primaryProducePlanIPage.getRecords());
+        planVO.setLimit(limit);
+        planVO.setTotal(primaryProducePlanIPage.getTotal());
+        planVO.setPages(primaryProducePlanIPage.getPages());
+        return planVO;
+    }
+
     @PostMapping("/addPlan")
     public String addPlan(@RequestBody MesPrimaryProducePlan mesPrimaryProducePlan){
         return mesPrimaryProducePlanService.addPlan(mesPrimaryProducePlan);
@@ -50,6 +62,11 @@ public class MesPrimaryProducePlanController {
     @GetMapping("/autoFillPlanById/{id}")
     public String autoFillPlanById(@PathVariable("id") Long id){
         return mesPrimaryProducePlanService.autoFillPlanById(id);
+    }
+
+    @GetMapping("/fixPlanById/{id}")
+    public String fixPlanById(@PathVariable("id") Long id){
+        return mesPrimaryProducePlanService.fixPlanById(id);
     }
 
     @GetMapping("/getProductPlan")

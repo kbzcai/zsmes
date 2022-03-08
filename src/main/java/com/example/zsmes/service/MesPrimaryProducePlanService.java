@@ -40,4 +40,8 @@ public interface MesPrimaryProducePlanService extends IService<MesPrimaryProduce
     List<MesPrimaryProducePlan> getUnFinishPlan();
 
     String pass(String before,Integer index);
+
+    IPage<MesPrimaryProducePlan> queryByListByFix(int page, int limit, PlanCondition planCondition);
+
+    String fixPlanById(Long id);
 }

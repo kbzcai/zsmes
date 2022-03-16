@@ -74,7 +74,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
         if (!StringUtils.isEmpty(endTime)) {
             wrapper.le("plan_date", endTime);
         }
-        wrapper.gt("welding_finish_num",0);
+        wrapper.gt("welding_finish_num", 0);
         IPage<MesPrimaryProducePlan> primaryProducePlanIPage = mesPrimaryProducePlanMapper.selectPage(page, wrapper);
         return primaryProducePlanIPage;
     }
@@ -110,7 +110,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
     @Override
     public String fixPlanById(Long id) {
         MesPrimaryProducePlan mesPrimaryProducePlan = mesPrimaryProducePlanMapper.selectById(id);
-        mesPrimaryProducePlan.setActualNum(mesPrimaryProducePlan.getPlanNum()+ mesPrimaryProducePlan.getWeldingFinishNum());
+        mesPrimaryProducePlan.setActualNum(mesPrimaryProducePlan.getPlanNum() + mesPrimaryProducePlan.getWeldingFinishNum());
         mesPrimaryProducePlan.setWeldingFinishNum(0);
         mesPrimaryProducePlanMapper.updateById(mesPrimaryProducePlan);
         return "补焊成功";
@@ -257,7 +257,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
     @Override
     public String pass(String before, Integer index) {
         QueryWrapper wrapper = new QueryWrapper();
-        System.out.println("--------------"+index);
+        System.out.println("--------------" + index);
         wrapper.eq("plan_no", before);
         MesPrimaryProducePlan plan = mesPrimaryProducePlanMapper.selectOne(wrapper);
         if (plan.getActualNum() + plan.getWeldingFinishNum() + plan.getFailNum() < plan.getPlanNum()) {

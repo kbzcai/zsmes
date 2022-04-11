@@ -74,10 +74,10 @@ public class MesBomController {
     public String importBom(@RequestParam("file") MultipartFile multipartFile) {
         log.info("导入bom表信息");
         List<Map<String, Object>> excelInfo = ReadExcelUtil.getExcelInfo(multipartFile, 0);
-        for (Map<String,Object> map:excelInfo
-             ) {
-            for (Map.Entry<String,Object> entry : map.entrySet()) {
-                System.out.print("Key = " + entry.getKey() + ", Value = " + entry.getValue()+" ");
+        for (Map<String, Object> map : excelInfo
+        ) {
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                System.out.print("Key = " + entry.getKey() + ", Value = " + entry.getValue() + " ");
             }
         }
 //        excelInfo.forEach(System.out::println);

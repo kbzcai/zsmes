@@ -45,9 +45,9 @@ public class MesProductController {
     private MesProductService mesProductService;
 
     @PostMapping("/queryByList/{page}/{limit}")
-    public ProductVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false) ProductCondition productCondition){
-        IPage<MesProduct> productIPage = mesProductService.queryByList(page, limit,productCondition);
-        ProductVO productVO=new ProductVO();
+    public ProductVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false) ProductCondition productCondition) {
+        IPage<MesProduct> productIPage = mesProductService.queryByList(page, limit, productCondition);
+        ProductVO productVO = new ProductVO();
         productVO.setCurrent(page);
         productVO.setData(productIPage.getRecords());
         productVO.setLimit(limit);
@@ -62,12 +62,12 @@ public class MesProductController {
     }
 
     @DeleteMapping("/deleteBySelectIds/{deleteIds}")
-    public String deleteBySelectIds(@PathVariable("deleteIds") List<String> deleteIds){
+    public String deleteBySelectIds(@PathVariable("deleteIds") List<String> deleteIds) {
         return mesProductService.deleteBySelectIds(deleteIds);
     }
 
     @GetMapping("/queryAllProduct")
-    public List<MesProduct> queryAllProduct(){
+    public List<MesProduct> queryAllProduct() {
         return mesProductService.queryAllProduct();
     }
 }

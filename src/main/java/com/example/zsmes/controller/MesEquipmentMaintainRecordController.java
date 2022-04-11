@@ -16,6 +16,5 @@ import org.springframework.stereotype.Controller;
 @Controller
 @RequestMapping("/mesEquipmentMaintainRecord")
 public class MesEquipmentMaintainRecordController {
-
 }
 

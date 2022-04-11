@@ -56,18 +56,18 @@ public class MesEquipmentFaultHistoryServiceImpl extends ServiceImpl<MesEquipmen
     @Override
     public IPage<MesEquipmentFaultHistory> queryByList(int currentpage, int limit, FaultHistoryCondition faultHistoryCondition) {
         Page<MesEquipmentFaultHistory> page = new Page<>(currentpage, limit);
-        QueryWrapper wrapper=new QueryWrapper();
-        String equipmentNo=faultHistoryCondition.getEquipmentNo();
-        String beginTime=faultHistoryCondition.getBeginTime();
-        String endTime=faultHistoryCondition.getEndTime();
-        if(!StringUtils.isEmpty(equipmentNo)){
-            wrapper.like("equipment_no",equipmentNo);
+        QueryWrapper wrapper = new QueryWrapper();
+        String equipmentNo = faultHistoryCondition.getEquipmentNo();
+        String beginTime = faultHistoryCondition.getBeginTime();
+        String endTime = faultHistoryCondition.getEndTime();
+        if (!StringUtils.isEmpty(equipmentNo)) {
+            wrapper.like("equipment_no", equipmentNo);
         }
-        if (!StringUtils.isEmpty(beginTime)){
-            wrapper.ge("fault_start_time",beginTime);
+        if (!StringUtils.isEmpty(beginTime)) {
+            wrapper.ge("fault_start_time", beginTime);
         }
-        if (!StringUtils.isEmpty(endTime)){
-            wrapper.le("fault_start_time",endTime);
+        if (!StringUtils.isEmpty(endTime)) {
+            wrapper.le("fault_start_time", endTime);
         }
         IPage<MesEquipmentFaultHistory> faultHistoryIPage = mesEquipmentFaultHistoryMapper.selectPage(page, wrapper);
         return faultHistoryIPage;
@@ -82,7 +82,6 @@ public class MesEquipmentFaultHistoryServiceImpl extends ServiceImpl<MesEquipmen
         } else {
             return "删除失败";
         }
-
     }
 
     @Override

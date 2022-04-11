@@ -39,7 +39,7 @@ public class MesPlcController {
 
     @GetMapping("/getPlcRecentlyData")
     public List<PlcVO> getPlcRecentlyData() {
-        List<PlcVO> plcVOList=mesPlcService.getPlcRecentlyData();
+        List<PlcVO> plcVOList = mesPlcService.getPlcRecentlyData();
         System.out.println(plcVOList);
         return plcVOList;
     }

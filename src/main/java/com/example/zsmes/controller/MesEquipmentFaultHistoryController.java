@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author cyj
@@ -29,7 +29,7 @@ public class MesEquipmentFaultHistoryController {
     private MesEquipmentFaultHistoryService mesEquipmentFaultHistoryService;
 
     @PostMapping("/addFaultHistory")
-    public String addFaultHistory(@RequestBody MesEquipmentFaultHistory mesEquipmentFaultHistory){
+    public String addFaultHistory(@RequestBody MesEquipmentFaultHistory mesEquipmentFaultHistory) {
         return mesEquipmentFaultHistoryService.addFaultHistoryService(mesEquipmentFaultHistory);
     }
 
@@ -39,9 +39,9 @@ public class MesEquipmentFaultHistoryController {
     }
 
     @PostMapping("/queryByList/{page}/{limit}")
-    public FaultHistoryVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false)FaultHistoryCondition faultHistoryCondition){
-        IPage<MesEquipmentFaultHistory> faultHistoryIPage = mesEquipmentFaultHistoryService.queryByList(page, limit,faultHistoryCondition);
-        FaultHistoryVO faultHistoryVO=new FaultHistoryVO();
+    public FaultHistoryVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false) FaultHistoryCondition faultHistoryCondition) {
+        IPage<MesEquipmentFaultHistory> faultHistoryIPage = mesEquipmentFaultHistoryService.queryByList(page, limit, faultHistoryCondition);
+        FaultHistoryVO faultHistoryVO = new FaultHistoryVO();
         faultHistoryVO.setCurrent(page);
         faultHistoryVO.setData(faultHistoryIPage.getRecords());
         faultHistoryVO.setLimit(limit);
@@ -51,7 +51,7 @@ public class MesEquipmentFaultHistoryController {
     }
 
     @DeleteMapping("/deleteBySelectIds/{deleteIds}")
-    public String deleteBySelectIds(@PathVariable("deleteIds")List<String> deleteIds){
+    public String deleteBySelectIds(@PathVariable("deleteIds") List<String> deleteIds) {
         return mesEquipmentFaultHistoryService.deleteBySelectIds(deleteIds);
     }
 }

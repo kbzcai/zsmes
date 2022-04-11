@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author cyj
@@ -29,9 +29,9 @@ public class MesEquipmentController {
     private MesEquipmentService mesEquipmentService;
 
     @PostMapping("/queryByList/{page}/{limit}")
-    public EquipmentVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false)EquipmentCondition equipmentCondition){
-        IPage<MesEquipment> equipmentIPage = mesEquipmentService.queryByList(page, limit,equipmentCondition);
-        EquipmentVO equipmentVO=new EquipmentVO();
+    public EquipmentVO queryByList(@PathVariable("page") int page, @PathVariable("limit") int limit, @RequestBody(required = false) EquipmentCondition equipmentCondition) {
+        IPage<MesEquipment> equipmentIPage = mesEquipmentService.queryByList(page, limit, equipmentCondition);
+        EquipmentVO equipmentVO = new EquipmentVO();
         equipmentVO.setCurrent(page);
         equipmentVO.setData(equipmentIPage.getRecords());
         equipmentVO.setLimit(limit);
@@ -46,17 +46,17 @@ public class MesEquipmentController {
     }
 
     @PostMapping("/addEquipment")
-    public String addEquipment(@RequestBody MesEquipment mesEquipment){
+    public String addEquipment(@RequestBody MesEquipment mesEquipment) {
         return mesEquipmentService.addMesEquipment(mesEquipment);
     }
 
     @PutMapping("/updateEquipment")
-    public String updateEquipment(@RequestBody MesEquipment mesEquipment){
+    public String updateEquipment(@RequestBody MesEquipment mesEquipment) {
         return mesEquipmentService.editByEquipmentNo(mesEquipment);
     }
 
     @DeleteMapping("/deleteBySelectIds/{deleteIds}")
-    public String deleteBySelectIds(@PathVariable("deleteIds")List<String> deleteIds){
+    public String deleteBySelectIds(@PathVariable("deleteIds") List<String> deleteIds) {
         return mesEquipmentService.deleteBySelectIds(deleteIds);
     }
 }

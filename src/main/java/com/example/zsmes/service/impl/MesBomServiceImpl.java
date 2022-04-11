@@ -145,7 +145,6 @@ public class MesBomServiceImpl extends ServiceImpl<MesBomMapper, MesBom> impleme
                     bom.setWorkingHours(map.get("工时(min)").toString());
                     bom.setProductWeight(map.get("重量(g)").toString());
                     bom.setManufacturer(map.get("使用单位").toString());
-
                     bom.setStatus("1");
                     //添加
                     mesBomMapper.insert(bom);

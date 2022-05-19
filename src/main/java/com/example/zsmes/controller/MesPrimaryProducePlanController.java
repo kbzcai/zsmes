@@ -2,15 +2,12 @@ package com.example.zsmes.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.example.zsmes.entity.MesBom;
-import com.example.zsmes.entity.MesEquipment;
 import com.example.zsmes.entity.MesPrimaryProducePlan;
 import com.example.zsmes.service.MesPrimaryProducePlanService;
+
 import com.example.zsmes.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.stereotype.Controller;
 
 import java.util.List;
 import java.util.Map;

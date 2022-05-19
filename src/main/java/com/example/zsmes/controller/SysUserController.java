@@ -7,10 +7,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.stereotype.Controller;
 
 /**
  * <p>
@@ -20,7 +17,7 @@ import org.springframework.stereotype.Controller;
  * @author cyj
  * @since 2021-05-19
  */
-@Controller
+@RestController
 @RequestMapping("/sysUser")
 public class SysUserController {
 
@@ -30,21 +27,20 @@ public class SysUserController {
         return url;
     }
 
-    @PostMapping("/login")
-    public String login(String username, String password, Model model) {
+    @PostMapping("/login/{username}/{password}")
+    public String login(@PathVariable("username") String username,@PathVariable("password") String password) {
+        System.out.println(username+password);
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, Md5Util.Md5Code(password));
         try {
             subject.login(token);
-            return "index";
+            return "登录成功";
         } catch (UnknownAccountException e) {
             e.printStackTrace();
-            model.addAttribute("msg", "用户名错误！");
-            return "login";
+            return "用户名错误";
         } catch (IncorrectCredentialsException e) {
             e.printStackTrace();
-            model.addAttribute("msg", "密码错误！");
-            return "login";
+            return "密码错误";
         }
     }
 

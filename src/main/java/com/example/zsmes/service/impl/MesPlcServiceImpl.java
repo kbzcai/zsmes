@@ -395,7 +395,7 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
             plcDataVo.setPlcElectric(plcElectricList);
             plcDataVo.setPlcVoltage(plcVoltageList);
             plcDataVo.setTime(timeList);
-        } else if (num.equals(10)) {
+        } else if(num.equals(10)){
             plcDataVo.setPlcName("plc10");
             List<MesPlcR10> data = mesPlcR10Mapper.getLastestData(wrapper);
             for (MesPlcR10 plcData : data
@@ -407,7 +407,7 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
             plcDataVo.setPlcElectric(plcElectricList);
             plcDataVo.setPlcVoltage(plcVoltageList);
             plcDataVo.setTime(timeList);
-        } else if (num.equals(11)) {
+        }else if(num.equals(11)){
             plcDataVo.setPlcName("plc11");
             List<MesPlc> data = mesPlcMapper.getLastestDataR11(wrapper);
             for (MesPlc plcData : data
@@ -419,7 +419,7 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
             plcDataVo.setPlcElectric(plcElectricList);
             plcDataVo.setPlcVoltage(plcVoltageList);
             plcDataVo.setTime(timeList);
-        } else if (num.equals(12)) {
+        }else if(num.equals(12)){
             plcDataVo.setPlcName("plc12");
             List<MesPlc> data = mesPlcMapper.getLastestDataR12(wrapper);
             for (MesPlc plcData : data
@@ -431,7 +431,7 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
             plcDataVo.setPlcElectric(plcElectricList);
             plcDataVo.setPlcVoltage(plcVoltageList);
             plcDataVo.setTime(timeList);
-        } else if (num.equals(13)) {
+        }else if(num.equals(13)){
             plcDataVo.setPlcName("plc13");
             List<MesPlc> data = mesPlcMapper.getLastestDataR13(wrapper);
             for (MesPlc plcData : data
@@ -443,7 +443,7 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
             plcDataVo.setPlcElectric(plcElectricList);
             plcDataVo.setPlcVoltage(plcVoltageList);
             plcDataVo.setTime(timeList);
-        } else if (num.equals(14)) {
+        }else if(num.equals(14)){
             plcDataVo.setPlcName("plc14");
             List<MesPlc> data = mesPlcMapper.getLastestDataR14(wrapper);
             for (MesPlc plcData : data
@@ -455,7 +455,7 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
             plcDataVo.setPlcElectric(plcElectricList);
             plcDataVo.setPlcVoltage(plcVoltageList);
             plcDataVo.setTime(timeList);
-        } else if (num.equals(15)) {
+        }else if(num.equals(15)){
             plcDataVo.setPlcName("plc15");
             List<MesPlc> data = mesPlcMapper.getLastestDataR15(wrapper);
             for (MesPlc plcData : data
@@ -486,11 +486,11 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         MesPlcR8 plc8 = mesPlcR8Mapper.getNumData(wrapper);
         MesPlcR9 plc9 = mesPlcR9Mapper.getNumData(wrapper);
         MesPlcR10 plc10 = mesPlcR10Mapper.getNumData(wrapper);
-        MesPlc plc11 = mesPlcMapper.getNumDataR11(wrapper);
-        MesPlc plc12 = mesPlcMapper.getNumDataR12(wrapper);
-        MesPlc plc13 = mesPlcMapper.getNumDataR13(wrapper);
-        MesPlc plc14 = mesPlcMapper.getNumDataR14(wrapper);
-        MesPlc plc15 = mesPlcMapper.getNumDataR15(wrapper);
+        MesPlc plc11=mesPlcMapper.getNumDataR11(wrapper);
+        MesPlc plc12=mesPlcMapper.getNumDataR12(wrapper);
+        MesPlc plc13=mesPlcMapper.getNumDataR13(wrapper);
+        MesPlc plc14=mesPlcMapper.getNumDataR14(wrapper);
+        MesPlc plc15=mesPlcMapper.getNumDataR15(wrapper);
 
         list.add(new PlcStateVO(plc1.getR1EquipmentStatus(), plc1.getR1EquipmentStatus()));
         list.add(new PlcStateVO(plc2.getR1EquipmentStatus(), plc2.getR1EquipmentStatus()));
@@ -530,7 +530,7 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         MesPlc plc13 = mesPlcMapper.getNumDataR13(wrapper);
         MesPlc plc14 = mesPlcMapper.getNumDataR14(wrapper);
         MesPlc plc15 = mesPlcMapper.getNumDataR15(wrapper);
-
+        
         plcVOList.add(new PlcVO("#01", plc1.getR1EquipmentStatus(), plc1.getR1EquipmentStatus(), plc1.getProdNum(), plc1.getProdNumb(), plc1.getR1Electric(), plc1.getR1Voltage(), plc1.getR2Electric(), plc1.getR2Voltage(), plc1.getCreateTime()));
         plcVOList.add(new PlcVO("#02", plc2.getR1EquipmentStatus(), plc2.getR1EquipmentStatus(), plc2.getProdNum(), plc2.getProdNumb(), plc2.getR1Electric(), plc2.getR1Voltage(), plc2.getR2Electric(), plc2.getR2Voltage(), plc2.getCreateTime()));
         plcVOList.add(new PlcVO("#03", plc3.getR1EquipmentStatus(), plc3.getR1EquipmentStatus(), plc3.getProdNum(), plc3.getProdNumb(), plc3.getR1Electric(), plc3.getR1Voltage(), plc3.getR2Electric(), plc3.getR2Voltage(), plc3.getCreateTime()));
@@ -541,11 +541,11 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         plcVOList.add(new PlcVO("#08", plc8.getR1EquipmentStatus(), plc8.getR1EquipmentStatus(), plc8.getProdNum(), plc8.getProdNumb(), plc8.getR1Electric(), plc8.getR1Voltage(), plc8.getR2Electric(), plc8.getR2Voltage(), plc8.getCreateTime()));
         plcVOList.add(new PlcVO("#09", plc9.getR1EquipmentStatus(), plc9.getR1EquipmentStatus(), plc9.getProdNum(), plc9.getProdNumb(), plc9.getR1Electric(), plc9.getR1Voltage(), plc9.getR2Electric(), plc9.getR2Voltage(), plc9.getCreateTime()));
         plcVOList.add(new PlcVO("#10", plc10.getR1EquipmentStatus(), plc10.getR1EquipmentStatus(), plc10.getProdNum(), plc10.getProdNumb(), plc10.getR1Electric(), plc10.getR1Voltage(), plc10.getR2Electric(), plc10.getR2Voltage(), plc10.getCreateTime()));
-        plcVOList.add(new PlcVO("#11", plc11.getR1EquipmentStatus(), plc11.getR1EquipmentStatus(), plc11.getProdNum(), plc11.getProdNumb(), plc11.getR1Electric(), plc11.getR1Voltage(), plc11.getR2Electric(), plc11.getR2Voltage(), plc11.getCreateTime()));
-        plcVOList.add(new PlcVO("#12", plc12.getR1EquipmentStatus(), plc12.getR1EquipmentStatus(), plc12.getProdNum(), plc12.getProdNumb(), plc12.getR1Electric(), plc12.getR1Voltage(), plc12.getR2Electric(), plc12.getR2Voltage(), plc12.getCreateTime()));
-        plcVOList.add(new PlcVO("#13", plc13.getR1EquipmentStatus(), plc13.getR1EquipmentStatus(), plc13.getProdNum(), plc13.getProdNumb(), plc13.getR1Electric(), plc13.getR1Voltage(), plc13.getR2Electric(), plc13.getR2Voltage(), plc13.getCreateTime()));
-        plcVOList.add(new PlcVO("#14", plc14.getR1EquipmentStatus(), plc14.getR1EquipmentStatus(), plc14.getProdNum(), plc14.getProdNumb(), plc14.getR1Electric(), plc14.getR1Voltage(), plc14.getR2Electric(), plc14.getR2Voltage(), plc14.getCreateTime()));
-        plcVOList.add(new PlcVO("#15", plc15.getR1EquipmentStatus(), plc15.getR1EquipmentStatus(), plc15.getProdNum(), plc15.getProdNumb(), plc15.getR1Electric(), plc15.getR1Voltage(), plc15.getR2Electric(), plc15.getR2Voltage(), plc15.getCreateTime()));
+        plcVOList.add(new PlcVO("#11", plc11.getR1EquipmentStatus(), plc11.getR1EquipmentStatus(), plc1.getProdNum(), plc10.getProdNumb(), plc10.getR1Electric(), plc10.getR1Voltage(), plc10.getR2Electric(), plc10.getR2Voltage(), plc10.getCreateTime()));
+        plcVOList.add(new PlcVO("#12", plc12.getR1EquipmentStatus(), plc12.getR1EquipmentStatus(), plc10.getProdNum(), plc10.getProdNumb(), plc10.getR1Electric(), plc10.getR1Voltage(), plc10.getR2Electric(), plc10.getR2Voltage(), plc10.getCreateTime()));
+        plcVOList.add(new PlcVO("#13", plc13.getR1EquipmentStatus(), plc13.getR1EquipmentStatus(), plc10.getProdNum(), plc10.getProdNumb(), plc10.getR1Electric(), plc10.getR1Voltage(), plc10.getR2Electric(), plc10.getR2Voltage(), plc10.getCreateTime()));
+        plcVOList.add(new PlcVO("#14", plc14.getR1EquipmentStatus(), plc14.getR1EquipmentStatus(), plc10.getProdNum(), plc10.getProdNumb(), plc10.getR1Electric(), plc10.getR1Voltage(), plc10.getR2Electric(), plc10.getR2Voltage(), plc10.getCreateTime()));
+        plcVOList.add(new PlcVO("#15", plc15.getR1EquipmentStatus(), plc15.getR1EquipmentStatus(), plc10.getProdNum(), plc10.getProdNumb(), plc10.getR1Electric(), plc10.getR1Voltage(), plc10.getR2Electric(), plc10.getR2Voltage(), plc10.getCreateTime()));
         return plcVOList;
     }
 }

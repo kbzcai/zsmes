@@ -18,16 +18,16 @@ public class ShiroConfig {
     DefaultWebSecurityManager defaultWebSecurityManager){
         ShiroFilterFactoryBean factoryBean=new ShiroFilterFactoryBean();
         factoryBean.setSecurityManager(defaultWebSecurityManager);
-        //权限设置
-        Map<String,String> map=new HashMap<>();
-        map.put("/sysUser/main","authc");
-        map.put("/sysUser/manage","perms[manage]");
-        map.put("/sysUser/administrator","roles[administrator]");
-        factoryBean.setFilterChainDefinitionMap(map);
-        //设置登录页面
-        factoryBean.setLoginUrl("/sysUser/login");
-        //设置未授权页面
-        factoryBean.setUnauthorizedUrl("/sysUser/unauth");
+//        //权限设置
+//        Map<String,String> map=new HashMap<>();
+//        map.put("/sysUser/main","authc");
+//        map.put("/sysUser/manage","perms[manage]");
+//        map.put("/sysUser/administrator","roles[administrator]");
+//        factoryBean.setFilterChainDefinitionMap(map);
+//        //设置登录页面
+//        factoryBean.setLoginUrl("/sysUser/login");
+//        //设置未授权页面
+//        factoryBean.setUnauthorizedUrl("/sysUser/unauth");
         return factoryBean;
     }
 

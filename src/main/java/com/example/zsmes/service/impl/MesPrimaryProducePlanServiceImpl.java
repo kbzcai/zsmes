@@ -110,7 +110,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
     @Override
     public String fixPlanById(Long id) {
         MesPrimaryProducePlan mesPrimaryProducePlan = mesPrimaryProducePlanMapper.selectById(id);
-        mesPrimaryProducePlan.setActualNum(mesPrimaryProducePlan.getPlanNum() + mesPrimaryProducePlan.getWeldingFinishNum());
+        mesPrimaryProducePlan.setActualNum(mesPrimaryProducePlan.getActualNum() + mesPrimaryProducePlan.getWeldingFinishNum());
         mesPrimaryProducePlan.setWeldingFinishNum(0);
         mesPrimaryProducePlanMapper.updateById(mesPrimaryProducePlan);
         return "补焊成功";
@@ -130,6 +130,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
             plan.setPlanNum(mesPrimaryProducePlan.getPlanNum());
             plan.setActualNum(mesPrimaryProducePlan.getActualNum());
             plan.setWeldingFinishNum(mesPrimaryProducePlan.getWeldingFinishNum());
+
             plan.setFailNum(mesPrimaryProducePlan.getFailNum());
             if (mesPrimaryProducePlan.getActualNum() + mesPrimaryProducePlan.getWeldingFinishNum() + mesPrimaryProducePlan.getFailNum() ==
                     mesPrimaryProducePlan.getPlanNum()) {
@@ -165,6 +166,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
         ) {
             System.out.println(plan);
         }
+
         actualNumList.add(mesPrimaryProducePlanMapper.queryActualNumDay());
         actualNumList.add(mesPrimaryProducePlanMapper.queryActualNumWeek());
         actualNumList.add(mesPrimaryProducePlanMapper.queryActualNumMonth());
@@ -276,7 +278,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
             }
             mesPrimaryProducePlanMapper.updateById(plan);
             return "合格";
-        } else {
+         }else {
             return "系统出错，请重新检查数据库数据";
         }
     }

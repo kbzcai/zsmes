@@ -12,6 +12,7 @@ import com.example.zsmes.vo.PlcVO;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import java.util.List;
  * @since 2021-05-19
  */
 @Service
+@Transactional
 public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> implements MesPlcService {
 
     @Autowired
@@ -530,7 +532,7 @@ public class MesPlcServiceImpl extends ServiceImpl<MesPlcMapper, MesPlc> impleme
         MesPlc plc13 = mesPlcMapper.getNumDataR13(wrapper);
         MesPlc plc14 = mesPlcMapper.getNumDataR14(wrapper);
         MesPlc plc15 = mesPlcMapper.getNumDataR15(wrapper);
-        
+
         plcVOList.add(new PlcVO("#01", plc1.getR1EquipmentStatus(), plc1.getR1EquipmentStatus(), plc1.getProdNum(), plc1.getProdNumb(), plc1.getR1Electric(), plc1.getR1Voltage(), plc1.getR2Electric(), plc1.getR2Voltage(), plc1.getCreateTime()));
         plcVOList.add(new PlcVO("#02", plc2.getR1EquipmentStatus(), plc2.getR1EquipmentStatus(), plc2.getProdNum(), plc2.getProdNumb(), plc2.getR1Electric(), plc2.getR1Voltage(), plc2.getR2Electric(), plc2.getR2Voltage(), plc2.getCreateTime()));
         plcVOList.add(new PlcVO("#03", plc3.getR1EquipmentStatus(), plc3.getR1EquipmentStatus(), plc3.getProdNum(), plc3.getProdNumb(), plc3.getR1Electric(), plc3.getR1Voltage(), plc3.getR2Electric(), plc3.getR2Voltage(), plc3.getCreateTime()));

@@ -13,6 +13,7 @@ import com.example.zsmes.utils.GetUUID;
 import com.example.zsmes.vo.FaultHistoryCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
  * @since 2021-05-19
  */
 @Service
+@Transactional
 public class MesEquipmentFaultHistoryServiceImpl extends ServiceImpl<MesEquipmentFaultHistoryMapper, MesEquipmentFaultHistory> implements MesEquipmentFaultHistoryService {
 
     @Autowired

@@ -16,6 +16,7 @@ import com.example.zsmes.vo.BomCondition;
 import com.example.zsmes.vo.BomVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
  * @author cyj
  * @since 2021-05-19
  */
+@Transactional
 @Service
 public class MesBomServiceImpl extends ServiceImpl<MesBomMapper, MesBom> implements MesBomService {
 
@@ -51,7 +53,6 @@ public class MesBomServiceImpl extends ServiceImpl<MesBomMapper, MesBom> impleme
             MesStation mesStation = mesStationMapper.selectOne(wrapper);
             map.put("工位", mesStation.getStationNo());
         }
-
         return null;
     }
 

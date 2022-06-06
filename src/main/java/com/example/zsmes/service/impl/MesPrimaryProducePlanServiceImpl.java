@@ -3,9 +3,7 @@ package com.example.zsmes.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.zsmes.entity.MesEquipment;
 import com.example.zsmes.entity.MesPrimaryProducePlan;
-import com.example.zsmes.entity.MesProduct;
 import com.example.zsmes.mapper.MesPrimaryProducePlanMapper;
 import com.example.zsmes.service.MesPrimaryProducePlanService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -15,6 +13,7 @@ import com.example.zsmes.vo.PlanDataVo;
 import com.example.zsmes.vo.ProductingPlanVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.*;
@@ -29,6 +28,7 @@ import java.util.stream.Collectors;
  * @since 2021-05-19
  */
 @Service
+@Transactional
 public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProducePlanMapper, MesPrimaryProducePlan> implements MesPrimaryProducePlanService {
 
     @Autowired
@@ -65,6 +65,7 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
         String planNo = planCondition.getPlanNo();
         String beginTime = planCondition.getBeginTime();
         String endTime = planCondition.getEndTime();
+
         if (!StringUtils.isEmpty(planNo)) {
             wrapper.like("plan_no", planNo);
         }
@@ -130,7 +131,6 @@ public class MesPrimaryProducePlanServiceImpl extends ServiceImpl<MesPrimaryProd
             plan.setPlanNum(mesPrimaryProducePlan.getPlanNum());
             plan.setActualNum(mesPrimaryProducePlan.getActualNum());
             plan.setWeldingFinishNum(mesPrimaryProducePlan.getWeldingFinishNum());
-
             plan.setFailNum(mesPrimaryProducePlan.getFailNum());
             if (mesPrimaryProducePlan.getActualNum() + mesPrimaryProducePlan.getWeldingFinishNum() + mesPrimaryProducePlan.getFailNum() ==
                     mesPrimaryProducePlan.getPlanNum()) {

@@ -17,6 +17,7 @@ import com.example.zsmes.utils.PageParam;
 import com.example.zsmes.vo.ProductCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import java.util.stream.Collectors;
  * @since 2021-05-19
  */
 @Service
+@Transactional
 public class MesProductServiceImpl extends ServiceImpl<MesProductMapper, MesProduct> implements MesProductService {
 
     @Autowired
@@ -214,6 +216,4 @@ public class MesProductServiceImpl extends ServiceImpl<MesProductMapper, MesProd
         System.out.println(productNoList);
         return productNoList;
     }
-
-
 }

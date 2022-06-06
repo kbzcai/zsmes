@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.zsmes.vo.EquipmentCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
  * @since 2021-05-19
  */
 @Service
+@Transactional
 public class MesEquipmentServiceImpl extends ServiceImpl<MesEquipmentMapper, MesEquipment> implements MesEquipmentService {
 
     @Autowired
